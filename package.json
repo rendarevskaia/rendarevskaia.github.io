@@ -1,0 +1,14 @@
+{
+  "name": "elena-rendarevskaya-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "test": "node scripts/build.mjs && node --test tests/site.test.mjs"
+  }
+}
