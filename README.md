@@ -36,8 +36,11 @@ category: "стратегия"
 slug: "zagolovok-latinicey"
 draft: false
 image: "/og/editorial.png"
+related: "slug-drugoy-stati,eshche-odin-slug"
 ---
 ```
+
+Поле `related` необязательное. В нём можно через запятую перечислить `slug` других статей — они появятся в блоке «Связанные материалы» внизу страницы.
 
 Доступные категории перечислены в `src/site.mjs`. Черновики (`draft: true`) в сайт, RSS и sitemap не попадают.
 

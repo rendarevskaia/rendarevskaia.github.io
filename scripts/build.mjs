@@ -128,6 +128,31 @@ function articleRow(article) {
   </a>`;
 }
 
+function relatedMaterials(article, articles) {
+  const slugs = String(article.related || "")
+    .split(",")
+    .map((slug) => slug.trim())
+    .filter(Boolean);
+
+  if (!slugs.length) {
+    return `<div class="related-placeholder"><strong>Связанные материалы</strong><br>Этот блок подготовлен для будущей подборки статей по теме.</div>`;
+  }
+
+  const bySlug = new Map(articles.map((item) => [item.slug, item]));
+  const related = slugs.map((slug) => {
+    const item = bySlug.get(slug);
+    if (!item) throw new Error(`Не найдена связанная статья «${slug}» для ${article.slug}`);
+    if (item.slug === article.slug) throw new Error(`Статья ${article.slug} не может ссылаться на себя`);
+    return item;
+  });
+
+  return `<section class="related-materials" aria-labelledby="related-${article.slug}">
+    <p class="section-kicker">Продолжить чтение</p>
+    <h2 id="related-${article.slug}">Связанные материалы</h2>
+    <ul>${related.map((item) => `<li><a href="${href(articlePath(item))}">${escapeHtml(item.title)}</a><span>${escapeHtml(item.description)}</span></li>`).join("")}</ul>
+  </section>`;
+}
+
 async function loadArticles() {
   const directory = path.join(root, "content/articles");
   const files = (await readdir(directory)).filter((file) => file.endsWith(".md"));
@@ -226,7 +251,7 @@ async function build() {
       <footer class="article-footer">
         <a class="text-link" href="${href("/articles/")}">← Все статьи</a>
         <div class="author-block"><div class="author-monogram" aria-hidden="true">ЕР</div><p><strong>${site.name}</strong><br>${site.role}</p></div>
-        <div class="related-placeholder"><strong>Связанные материалы</strong><br>Этот блок подготовлен для будущей подборки статей по теме.</div>
+        ${relatedMaterials(article, articles)}
       </footer>
     </article>`;
     await writePage(articlePath(article), layout({ title: `${article.title} — ${site.name}`, description: article.description, pathname: articlePath(article), active: "articles", type: "article", image: article.image, content, jsonLd }));

@@ -249,6 +249,19 @@ main { min-height: 65vh; }
 .author-monogram { display: grid; place-items: center; width: 4rem; aspect-ratio: 1; border: 1px solid var(--ink); border-radius: 50%; font-family: Georgia, "Times New Roman", serif; font-size: 1.25rem; }
 .author-block p { margin: 0; color: var(--muted); }
 .related-placeholder { padding-top: 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.92rem; }
+.related-materials { padding-top: 2rem; border-top: 1px solid var(--line); }
+.related-materials h2 {
+  margin: 0.45rem 0 1.4rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+.related-materials ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
+.related-materials li { padding: 1.25rem 0 1.4rem; border-bottom: 1px solid var(--line); }
+.related-materials a { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 1.2rem; font-weight: 600; line-height: 1.25; }
+.related-materials span { display: block; margin-top: 0.4rem; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
 
 .about-layout { display: grid; grid-template-columns: 15rem minmax(0, var(--reading)); gap: clamp(3rem, 8vw, 8rem); padding-bottom: 7rem; }
 .about-aside { color: var(--muted); font-size: 0.92rem; }

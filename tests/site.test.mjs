@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 const read = (file) => readFile(new URL(`../dist/${file}`, import.meta.url), "utf8");
@@ -56,6 +56,25 @@ test("разбор «Озарка» опубликован в теме «упр�
   assert.match(topic, /articles\/ozark-dlya-predprinimateley\//);
 });
 
+test("цикл о когнитивных искажениях опубликован и связан между собой", async () => {
+  const [hub, first, second, third, archive, topic] = await Promise.all([
+    read("articles/kognitivnye-iskazheniya-v-biznese/index.html"),
+    read("articles/predprinimatel-protiv-effekta-tolpy/index.html"),
+    read("articles/novosti-keisy-i-iskazhennaya-strategiya/index.html"),
+    read("articles/plohie-resheniya-i-chuzhie-ramki/index.html"),
+    read("articles/index.html"),
+    read("topics/myshlenie/index.html"),
+  ]);
+  assert.match(hub, /Шесть ловушек мышления/);
+  assert.match(hub, /t\.me\/NeProstoBizness\/48/);
+  assert.match(first, /Эффект толпы/);
+  assert.match(second, /Ошибка выжившего/);
+  assert.match(third, /Эскалация обязательств/);
+  assert.match(first, /class="related-materials"/);
+  assert.match(archive, /kognitivnye-iskazheniya-v-biznese/);
+  assert.match(topic, /plohie-resheniya-i-chuzhie-ramki/);
+});
+
 test("служебные файлы существуют и содержат публичные URL", async () => {
   const [sitemap, robots, rss] = await Promise.all([
     read("sitemap.xml"),
@@ -65,4 +84,18 @@ test("служебные файлы существуют и содержат п�
   assert.match(sitemap, /wildberries-sellers-capital/);
   assert.match(robots, /Sitemap:/);
   assert.match(rss, /<rss version="2.0">/);
+});
+
+test("внутренние ссылки ведут на собранные страницы и файлы", async () => {
+  const dist = new URL("../dist/", import.meta.url);
+  const files = (await readdir(dist, { recursive: true })).filter((file) => file.endsWith(".html"));
+
+  for (const file of files) {
+    const html = await readFile(new URL(file, dist), "utf8");
+    for (const match of html.matchAll(/href="(\/[^"#?]*)/g)) {
+      const href = match[1];
+      const target = href === "/" ? "index.html" : href.endsWith("/") ? `${href.slice(1)}index.html` : href.slice(1);
+      await assert.doesNotReject(access(new URL(target, dist)), `${file}: не найдена ссылка ${href}`);
+    }
+  }
 });
