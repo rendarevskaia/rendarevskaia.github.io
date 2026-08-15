@@ -129,7 +129,7 @@ function layout({
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   ${imageUrl ? `<meta name="twitter:image" content="${imageUrl}">` : ""}
-  <link rel="stylesheet" href="${href("/styles.css")}">
+  <link rel="stylesheet" href="${href("/styles.css?v=20260815-editorial")}">
   ${jsonLd ? `<script type="application/ld+json">${jsonLd}</script>` : ""}
 </head>
 <body>

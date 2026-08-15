@@ -15,6 +15,7 @@ test("главная страница содержит имя, навигаци�
   assert.match(html, /Три направления/);
   assert.match(html, /images\/brand\/elena-editorial-hero\.webp/);
   assert.match(html, /class="section section-band"/);
+  assert.match(html, /styles\.css\?v=20260815-editorial/);
   assert.doesNotMatch(html, /topics\/biznes\//);
   assert.match(html, /rel="canonical"/);
   assert.match(html, /rel="icon"/);
