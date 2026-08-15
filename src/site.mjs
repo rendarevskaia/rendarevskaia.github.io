@@ -13,9 +13,10 @@ export const site = {
   contact: "https://t.me/Elena_Rendarevskaya",
   home: {
     featuredSlugs: [
+      "ai-native-finansovaya-funktsiya",
+      "finansovaya-sluzhba-obsluzhivaet-haos",
+      "strategicheskaya-sessiya-rezultat-363-dnya",
       "wildberries-sellers-capital",
-      "ozark-dlya-predprinimateley",
-      "kognitivnye-iskazheniya-v-biznese",
     ],
     pillars: [
       {

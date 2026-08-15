@@ -112,6 +112,10 @@ test("служебные файлы существуют и содержат п�
   ]);
   assert.match(sitemap, /wildberries-sellers-capital/);
   assert.match(sitemap, /topics\/finansy\//);
+  assert.match(sitemap, /topics\/issledovaniya\//);
+  assert.match(sitemap, /topics\/strategiya\//);
+  assert.match(sitemap, /topics\/predprinimatelstvo\//);
+  assert.match(sitemap, /topics\/chelovek-i-rabota\//);
   assert.doesNotMatch(sitemap, /topics\/biznes\//);
   assert.match(robots, /Sitemap:/);
   assert.match(rss, /<rss version="2.0">/);
@@ -127,15 +131,10 @@ test("пустые темы доступны для будущих матери�
 });
 
 test("каждая статья ведёт к подписке и реальным связанным материалам", async () => {
-  const articles = [
-    "kognitivnye-iskazheniya-v-biznese",
-    "novosti-keisy-i-iskazhennaya-strategiya",
-    "ozark-dlya-predprinimateley",
-    "plohie-resheniya-i-chuzhie-ramki",
-    "predprinimatel-protiv-effekta-tolpy",
-    "shuba",
-    "wildberries-sellers-capital",
-  ];
+  const directory = new URL("../dist/articles/", import.meta.url);
+  const articles = (await readdir(directory, { withFileTypes: true }))
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
   for (const slug of articles) {
     const html = await read(`articles/${slug}/index.html`);
     assert.match(html, /class="reader-cta"/, slug);
@@ -144,18 +143,17 @@ test("каждая статья ведёт к подписке и реальны
   }
 });
 
-test("ключевые статьи имеют собственные изображения для Telegram", async () => {
-  const slugs = [
-    "wildberries-sellers-capital",
-    "kognitivnye-iskazheniya-v-biznese",
-    "novosti-keisy-i-iskazhennaya-strategiya",
-    "plohie-resheniya-i-chuzhie-ramki",
-    "predprinimatel-protiv-effekta-tolpy",
-  ];
+test("все статьи имеют собственные изображения для Telegram", async () => {
+  const directory = new URL("../dist/articles/", import.meta.url);
+  const slugs = (await readdir(directory, { withFileTypes: true }))
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
   for (const slug of slugs) {
     const html = await read(`articles/${slug}/index.html`);
-    assert.match(html, new RegExp(`property="og:image" content="https://rendarevskaia\\.github\\.io/og/${slug}\\.png"`), slug);
-    await assert.doesNotReject(access(new URL(`../public/og/${slug}.png`, import.meta.url)), slug);
+    const match = html.match(/property="og:image" content="https:\/\/rendarevskaia\.github\.io(\/og\/[^"?]+\.png)"/);
+    assert.ok(match, `${slug}: не найдено собственное изображение Open Graph`);
+    assert.notEqual(match[1], "/og/editorial.png", `${slug}: используется общая обложка`);
+    await assert.doesNotReject(access(new URL(`../public${match[1]}`, import.meta.url)), slug);
   }
 });
 
