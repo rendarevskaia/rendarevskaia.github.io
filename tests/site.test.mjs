@@ -28,6 +28,20 @@ test("первая статья собрана со всеми метаданн�
   assert.doesNotMatch(html, /href="[^"]*<em>/);
 });
 
+test("эссе «Шуба» опубликовано с фотографией и отдельной OG-обложкой", async () => {
+  const [html, archive, topic] = await Promise.all([
+    read("articles/shuba/index.html"),
+    read("articles/index.html"),
+    read("topics/myshlenie/index.html"),
+  ]);
+  assert.match(html, /<h1>Шуба<\/h1>/);
+  assert.match(html, /src="\/images\/articles\/shuba\.jpg"/);
+  assert.match(html, /property="og:image" content="https:\/\/rendarevskaia\.github\.io\/og\/shuba\.png"/);
+  assert.match(html, /Июнь 2026\. Москва - Кипр\./);
+  assert.match(archive, /articles\/shuba\//);
+  assert.match(topic, /articles\/shuba\//);
+});
+
 test("служебные файлы существуют и содержат публичные URL", async () => {
   const [sitemap, robots, rss] = await Promise.all([
     read("sitemap.xml"),

@@ -75,6 +75,7 @@ export function renderMarkdown(markdown) {
   for (const line of [...lines, ""]) {
     const trimmed = line.trim();
     const heading = trimmed.match(/^(#{2,4})\s+(.+)$/);
+    const image = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
     const unordered = trimmed.match(/^[-*]\s+(.+)$/);
     const ordered = trimmed.match(/^\d+\.\s+(.+)$/);
     const quote = trimmed.match(/^>\s?(.*)$/);
@@ -82,6 +83,10 @@ export function renderMarkdown(markdown) {
     if (!trimmed) {
       flushParagraph();
       flushList();
+    } else if (image) {
+      flushParagraph();
+      flushList();
+      output.push(`<figure class="prose-figure"><img src="${escapeHtml(image[2])}" alt="${escapeHtml(image[1])}" loading="eager" decoding="async"></figure>`);
     } else if (heading) {
       flushParagraph();
       flushList();
