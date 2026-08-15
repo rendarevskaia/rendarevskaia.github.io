@@ -252,11 +252,9 @@ async function build() {
   const populatedCategories = categories.filter((category) => articles.some((article) => article.category === category.name));
 
   const home = `<section class="shell hero">
-    <div>
+    <div class="hero-copy">
       <p class="eyebrow">Независимое медиа и архив текстов</p>
       <h1>Елена<br>Рендаревская</h1>
-    </div>
-    <div class="hero-pitch">
       <p class="hero-note">Разбираю, как предпринимателям принимать финансовые и управленческие решения в сложных системах.</p>
       <p class="hero-support">Длинные тексты о финансах, стратегии, управлении и человеке в работе.</p>
       <div class="hero-actions">
@@ -265,6 +263,10 @@ async function build() {
       </div>
       <p class="hero-credentials">В финансах с 2005 года · предпринимательский опыт с выходом из бизнеса · стратегические сессии и консалтинг</p>
     </div>
+    <figure class="hero-art">
+      <img src="${href(site.profile.editorialImage)}" alt="Иллюстрированный портрет Елены Рендаревской" width="1122" height="1402" loading="eager" fetchpriority="high">
+      <figcaption><span>Финансы</span><span>Стратегия</span><span>Человек</span></figcaption>
+    </figure>
   </section>
   <section class="shell section" id="start" aria-labelledby="start-title">
     <div class="section-heading">
@@ -280,14 +282,14 @@ async function build() {
     </div>
     <div class="article-list">${latest.map(articleRow).join("\n") || "<p>Материалы скоро появятся.</p>"}</div>
   </section>
-  <section class="shell section" aria-labelledby="directions-title">
+  <section class="section section-band" aria-labelledby="directions-title"><div class="shell">
     <div class="section-heading"><div><p class="section-kicker">Редакционная карта</p><h2 id="directions-title">Три направления</h2></div></div>
     <div class="editorial-paths">${site.home.pillars.map((pillar, index) => {
       const category = categoryByName(pillar.category);
       if (!category || !populatedCategories.some((item) => item.name === category.name)) return "";
       return `<a href="${href(`/topics/${category.slug}/`)}"><span class="path-number">0${index + 1}</span><div><h3>${escapeHtml(pillar.title)}</h3><p>${escapeHtml(pillar.description)}</p></div><span class="article-arrow" aria-hidden="true">↗</span></a>`;
     }).join("")}</div>
-  </section>`;
+  </div></section>`;
 
   await writePage("/", layout({
     title: site.title,
@@ -346,7 +348,7 @@ async function build() {
       publisher: { "@id": `${absolute("/about/")}#person`, "@type": "Person", name: site.name },
     });
     const content = `<article>
-      <header class="article-header">
+      <header class="article-header article-header-${category.slug}">
         <a class="meta" href="${href(categoryPath(article.category))}">${escapeHtml(article.category)}</a>
         <h1>${escapeHtml(article.title)}</h1>
         <p class="article-dek">${escapeHtml(article.description)}</p>
@@ -391,7 +393,7 @@ async function build() {
   const about = parseFrontMatter(aboutSource, "content/pages/about.md");
   const aboutContent = `<section class="shell page-header"><p class="eyebrow">Об авторе</p><h1 class="page-title">${escapeHtml(about.data.title)}</h1><p class="page-intro">${site.role}</p></section><section class="shell about-layout">
     <aside class="about-aside">
-      <img class="about-portrait" src="${href(site.profile.image)}" alt="Елена Рендаревская" width="300" height="300" loading="eager">
+      <div class="about-portrait-frame"><img class="about-portrait" src="${href(site.profile.image)}" alt="Елена Рендаревская" width="300" height="300" loading="eager"></div>
       <p class="section-kicker">Коротко</p>
       <dl class="about-facts">
         <div><dt>В финансах</dt><dd>с 2005 года</dd></div>

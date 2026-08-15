@@ -13,6 +13,8 @@ test("главная страница содержит имя, навигаци�
   assert.match(html, /Новые материалы/);
   assert.match(html, /Подписаться в Telegram/);
   assert.match(html, /Три направления/);
+  assert.match(html, /images\/brand\/elena-editorial-hero\.webp/);
+  assert.match(html, /class="section section-band"/);
   assert.doesNotMatch(html, /topics\/biznes\//);
   assert.match(html, /rel="canonical"/);
   assert.match(html, /rel="icon"/);
@@ -29,6 +31,7 @@ test("страница автора содержит биографию, фот�
   assert.match(html, /с 2005 года/);
   assert.match(html, /оборотом более 100 млн рублей/);
   assert.match(html, /images\/elena-rendarevskaya\.jpg/);
+  assert.match(html, /class="about-portrait-frame"/);
   assert.match(html, /"@type":"ProfilePage"/);
   assert.match(html, /"sameAs":\["https:\/\/network\.tochka\.com\/expert\/64\/"/);
   assert.match(html, /href="https:\/\/t\.me\/rendarevskaya"/);

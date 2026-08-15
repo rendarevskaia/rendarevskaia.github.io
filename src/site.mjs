@@ -38,6 +38,7 @@ export const site = {
   },
   profile: {
     image: "/images/elena-rendarevskaya.jpg",
+    editorialImage: "/images/brand/elena-editorial-hero.webp",
     sameAs: [
       "https://network.tochka.com/expert/64/",
       "https://taplink.cc/rendarevskaya",
