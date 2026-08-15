@@ -21,6 +21,11 @@ test("первая статья собрана со всеми метаданн�
   assert.match(html, /Связанные материалы/);
   assert.match(html, /<article>/);
   assert.match(html, /Источники и документы/);
+  assert.match(
+    html,
+    /href="https:\/\/www\.consultant\.ru\/document\/cons_doc_LAW_9027\/3eacab31c1963cdd60b71d21e403cf23450c07ca\/"/,
+  );
+  assert.doesNotMatch(html, /href="[^"]*<em>/);
 });
 
 test("служебные файлы существуют и содержат публичные URL", async () => {

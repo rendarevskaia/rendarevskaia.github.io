@@ -53,7 +53,7 @@ export function renderMarkdown(markdown) {
     let value = escapeHtml(text);
     value = value.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
     value = value.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-    value = value.replace(/_([^_]+)_/g, "<em>$1</em>");
+    value = value.replace(/(^|[\s(])_([^_\n]+)_(?=$|[\s).,!?;:])/g, "$1<em>$2</em>");
     value = value.replace(/`([^`]+)`/g, "<code>$1</code>");
     return value;
   };
