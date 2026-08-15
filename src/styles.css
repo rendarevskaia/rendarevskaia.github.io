@@ -247,6 +247,8 @@ main { min-height: 65vh; }
 }
 .author-block { display: grid; grid-template-columns: 4rem 1fr; gap: 1.2rem; align-items: center; margin: 3rem 0; }
 .author-monogram { display: grid; place-items: center; width: 4rem; aspect-ratio: 1; border: 1px solid var(--ink); border-radius: 50%; font-family: Georgia, "Times New Roman", serif; font-size: 1.25rem; }
+.author-photo { display: block; width: 4rem; height: 4rem; border-radius: 50%; object-fit: cover; }
+.author-name { color: var(--ink); text-underline-offset: 0.2em; }
 .author-block p { margin: 0; color: var(--muted); }
 .related-placeholder { padding-top: 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.92rem; }
 .related-materials { padding-top: 2rem; border-top: 1px solid var(--line); }
@@ -265,6 +267,14 @@ main { min-height: 65vh; }
 
 .about-layout { display: grid; grid-template-columns: 15rem minmax(0, var(--reading)); gap: clamp(3rem, 8vw, 8rem); padding-bottom: 7rem; }
 .about-aside { color: var(--muted); font-size: 0.92rem; }
+.about-portrait { display: block; width: 100%; height: auto; margin-bottom: 2rem; border-radius: 50%; }
+.about-facts { margin: 1rem 0 2rem; }
+.about-facts div { padding: 0.8rem 0; border-top: 1px solid var(--line); }
+.about-facts div:last-child { border-bottom: 1px solid var(--line); }
+.about-facts dt { color: var(--ink); font-weight: 650; }
+.about-facts dd { margin: 0.2rem 0 0; line-height: 1.45; }
+.about-links { display: grid; gap: 0.55rem; }
+.about-links a { color: var(--accent-dark); font-weight: 650; text-underline-offset: 0.22em; }
 .about-layout .prose { width: auto; margin: 0; padding: 0; }
 
 .site-footer {
@@ -300,6 +310,7 @@ main { min-height: 65vh; }
   .prose blockquote { margin: 2.5rem 0; padding: 0.25rem 0 0.25rem 1.25rem; }
   .about-layout { grid-template-columns: 1fr; gap: 2rem; }
   .about-aside { max-width: 24rem; }
+  .about-portrait { max-width: 13rem; }
   .site-footer { flex-direction: column; }
 }
 

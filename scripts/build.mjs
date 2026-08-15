@@ -30,6 +30,21 @@ function absolute(value = "/") {
   return `${siteUrl}${value.startsWith("/") ? value : `/${value}`}`;
 }
 
+function personSchema() {
+  return {
+    "@type": "Person",
+    "@id": `${absolute("/about/")}#person`,
+    name: site.name,
+    alternateName: site.alternateName,
+    url: absolute("/about/"),
+    image: absolute(site.profile.image),
+    jobTitle: site.role,
+    description: "Предприниматель, финансист, CFO-консультант и стратегический модератор. Работает с корпоративными финансами, стратегией и управлением.",
+    knowsAbout: site.profile.knowsAbout,
+    sameAs: site.profile.sameAs,
+  };
+}
+
 function parseFrontMatter(source, filename) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!match) throw new Error(`Нет front matter: ${filename}`);
@@ -214,7 +229,13 @@ async function build() {
     description: site.description,
     pathname: "/",
     content: home,
-    jsonLd: JSON.stringify({ "@context": "https://schema.org", "@type": "Person", name: site.name, url: siteUrl, jobTitle: site.role }),
+    jsonLd: JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        { "@type": "WebSite", "@id": `${siteUrl}/#website`, name: site.name, url: siteUrl, publisher: { "@id": `${absolute("/about/")}#person` } },
+        personSchema(),
+      ],
+    }),
   }));
 
   const years = articles.reduce((map, article) => {
@@ -237,8 +258,8 @@ async function build() {
       datePublished: article.date,
       mainEntityOfPage: articleUrl(article),
       image: absolute(article.image),
-      author: { "@type": "Person", name: site.name },
-      publisher: { "@type": "Person", name: site.name },
+      author: personSchema(),
+      publisher: { "@id": `${absolute("/about/")}#person`, "@type": "Person", name: site.name },
     });
     const content = `<article>
       <header class="article-header">
@@ -250,7 +271,7 @@ async function build() {
       <div class="prose">${renderMarkdown(article.body)}</div>
       <footer class="article-footer">
         <a class="text-link" href="${href("/articles/")}">← Все статьи</a>
-        <div class="author-block"><div class="author-monogram" aria-hidden="true">ЕР</div><p><strong>${site.name}</strong><br>${site.role}</p></div>
+        <div class="author-block"><img class="author-photo" src="${href(site.profile.image)}" alt="" width="64" height="64" loading="lazy"><p><a class="author-name" href="${href("/about/")}"><strong>${site.name}</strong></a><br>${site.role}</p></div>
         ${relatedMaterials(article, articles)}
       </footer>
     </article>`;
@@ -265,8 +286,25 @@ async function build() {
 
   const aboutSource = await readFile(path.join(root, "content/pages/about.md"), "utf8");
   const about = parseFrontMatter(aboutSource, "content/pages/about.md");
-  const aboutContent = `<section class="shell page-header"><p class="eyebrow">Автор</p><h1 class="page-title">${escapeHtml(about.data.title)}</h1><p class="page-intro">${site.role}</p></section><section class="shell about-layout"><aside class="about-aside">Временная структура страницы. Текст можно заменить в одном Markdown-файле.</aside><div class="prose">${renderMarkdown(about.body)}</div></section>`;
-  await writePage("/about/", layout({ title: `${about.data.title} — ${site.name}`, description: about.data.description, pathname: "/about/", active: "about", content: aboutContent }));
+  const aboutContent = `<section class="shell page-header"><p class="eyebrow">Об авторе</p><h1 class="page-title">${escapeHtml(about.data.title)}</h1><p class="page-intro">${site.role}</p></section><section class="shell about-layout">
+    <aside class="about-aside">
+      <img class="about-portrait" src="${href(site.profile.image)}" alt="Елена Рендаревская" width="300" height="300" loading="eager">
+      <p class="section-kicker">Коротко</p>
+      <dl class="about-facts">
+        <div><dt>В финансах</dt><dd>с 2005 года</dd></div>
+        <div><dt>Практика</dt><dd>финансы, стратегия, управление</dd></div>
+        <div><dt>Форматы</dt><dd>консалтинг, сопровождение, стратегические сессии</dd></div>
+      </dl>
+      <nav class="about-links" aria-label="Публичные профили">
+        <a href="https://t.me/rendarevskaya">Telegram</a>
+        <a href="https://network.tochka.com/expert/64/">Точка Нетворк</a>
+        <a href="https://taplink.cc/rendarevskaya">Taplink</a>
+      </nav>
+    </aside>
+    <div class="prose">${renderMarkdown(about.body)}</div>
+  </section>`;
+  const aboutJsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "ProfilePage", "@id": absolute("/about/"), mainEntity: personSchema() });
+  await writePage("/about/", layout({ title: about.data.seoTitle || `${about.data.title} — ${site.name}`, description: about.data.description, pathname: "/about/", active: "about", image: "/og/editorial.png", content: aboutContent, jsonLd: aboutJsonLd }));
 
   const urls = ["/", "/articles/", "/about/", ...articles.map(articlePath), ...categories.map((category) => `/topics/${category.slug}/`)];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${escapeXml(absolute(url))}</loc></url>`).join("\n")}\n</urlset>\n`;

@@ -2,12 +2,29 @@ import { escapeHtml } from "./utils.mjs";
 
 export const site = {
   name: "Елена Рендаревская",
+  alternateName: "Elena Rendarevskaya",
   role: "предприниматель, CFO-консультант, стратегический модератор",
   title: "Елена Рендаревская — статьи о бизнесе, финансах и стратегии",
   description:
     "Авторские материалы Елены Рендаревской о бизнесе, финансах, управлении, стратегии, предпринимательстве и человеке в работе.",
   defaultUrl: "https://rendarevskaia.github.io",
   language: "ru-RU",
+  profile: {
+    image: "/images/elena-rendarevskaya.jpg",
+    sameAs: [
+      "https://network.tochka.com/expert/64/",
+      "https://taplink.cc/rendarevskaya",
+      "https://t.me/rendarevskaya",
+    ],
+    knowsAbout: [
+      "корпоративные финансы",
+      "управленческий учёт",
+      "финансовая стратегия",
+      "стратегические сессии",
+      "операционное управление",
+      "регулярный менеджмент",
+    ],
+  },
 };
 
 export const categories = [

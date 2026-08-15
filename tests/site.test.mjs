@@ -11,6 +11,20 @@ test("главная страница содержит имя, навигаци�
   assert.match(html, /rel="canonical"/);
   assert.match(html, /property="og:image"/);
   assert.match(html, /application\/ld\+json/);
+  assert.match(html, /"@type":"WebSite"/);
+  assert.match(html, /"alternateName":"Elena Rendarevskaya"/);
+});
+
+test("страница автора содержит биографию, фотографию и ProfilePage", async () => {
+  const html = await read("about/index.html");
+  assert.match(html, /<h1 class="page-title">Елена Рендаревская<\/h1>/);
+  assert.match(html, /с 2005 года/);
+  assert.match(html, /оборотом более 100 млн рублей/);
+  assert.match(html, /images\/elena-rendarevskaya\.jpg/);
+  assert.match(html, /"@type":"ProfilePage"/);
+  assert.match(html, /"sameAs":\["https:\/\/network\.tochka\.com\/expert\/64\/"/);
+  assert.match(html, /href="https:\/\/t\.me\/rendarevskaya"/);
+  assert.match(html, /href="https:\/\/pro\.rbc\.ru\/demo\/65c44e4c9a794727f4f4f595"/);
 });
 
 test("первая статья собрана со всеми метаданными", async () => {
