@@ -6,7 +6,7 @@ export const site = {
   title: "Елена Рендаревская — статьи о бизнесе, финансах и стратегии",
   description:
     "Авторские материалы Елены Рендаревской о бизнесе, финансах, управлении, стратегии, предпринимательстве и человеке в работе.",
-  defaultUrl: "https://rendarevska-ship-it.github.io/-elena-site",
+  defaultUrl: "https://rendarevskaia.github.io",
   language: "ru-RU",
 };
 

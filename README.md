@@ -57,7 +57,7 @@ Workflow `.github/workflows/pages.yml` соберёт сайт и опублик
 
 В репозитории на GitHub один раз откройте **Settings → Pages** и в разделе **Build and deployment → Source** выберите **GitHub Actions**. После этого каждый push в ветку `main` будет обновлять сайт.
 
-По умолчанию проект публикуется по адресу `https://rendarevska-ship-it.github.io/-elena-site/`. Workflow автоматически задаёт правильный путь проекта, canonical URL, sitemap, RSS и ссылки на ресурсы.
+Сайт публикуется по адресу `https://rendarevskaia.github.io/`. Workflow автоматически задаёт правильные canonical URL, sitemap, RSS и ссылки на ресурсы.
 
 ## 5. Как подключить собственный домен позже
 
@@ -66,7 +66,7 @@ Workflow `.github/workflows/pages.yml` соберёт сайт и опублик
 3. В `.github/workflows/pages.yml` замените `SITE_URL` на адрес домена и установите `BASE_PATH` в пустую строку.
 4. При желании добавьте файл `public/CNAME` с доменом без `https://`.
 
-Важно: адрес `rendarevska.github.io` является GitHub Pages-адресом аккаунта `rendarevska`. Чтобы публиковаться именно там, репозиторий должен находиться в этом аккаунте и называться `rendarevska.github.io`. Текущий репозиторий принадлежит аккаунту `rendarevska-ship-it`, поэтому его стандартный Pages-адрес другой.
+Текущий репозиторий уже настроен как персональный GitHub Pages-сайт аккаунта `rendarevskaia`.
 
 ## Структура
 

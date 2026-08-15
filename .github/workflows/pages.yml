@@ -26,8 +26,8 @@ jobs:
       - run: npm ci
       - run: npm test
         env:
-          SITE_URL: https://rendarevska-ship-it.github.io/-elena-site
-          BASE_PATH: /-elena-site
+          SITE_URL: https://rendarevskaia.github.io
+          BASE_PATH: ""
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
