@@ -429,6 +429,44 @@ main { min-height: 65vh; }
 .prose-figure { margin: 0 0 3.5rem; }
 .prose-figure img { display: block; width: 100%; height: auto; }
 
+.prose-with-resource { padding-bottom: 3rem; }
+.article-resource {
+  position: relative;
+  overflow: hidden;
+  width: min(calc(100% - 3rem), var(--reading));
+  margin: 0 auto clamp(4rem, 8vw, 7rem);
+  padding: clamp(2rem, 5vw, 3.25rem);
+  border-top: 0.35rem solid var(--coral);
+  background:
+    linear-gradient(125deg, transparent 0 68%, rgba(197, 138, 53, 0.14) 68% 69%, transparent 69%),
+    var(--teal-dark);
+  color: var(--paper);
+}
+.article-resource::after {
+  position: absolute;
+  right: -3rem;
+  bottom: -4rem;
+  width: 11rem;
+  aspect-ratio: 1;
+  border: 1px solid rgba(251, 248, 241, 0.35);
+  border-radius: 50%;
+  content: "";
+}
+.article-resource > * { position: relative; z-index: 1; }
+.article-resource .section-kicker { color: #f0bd66; }
+.article-resource h2 {
+  max-width: 34rem;
+  margin: 0.45rem 0 0.8rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+.article-resource > p:not(.section-kicker) { max-width: 34rem; margin: 0 0 1.5rem; color: rgba(251, 248, 241, 0.78); }
+.article-resource .button-primary { border-color: var(--coral); background: var(--coral); }
+.article-resource .button-primary:hover { border-color: var(--paper); background: var(--paper); color: var(--ink); }
+
 .article-footer {
   width: min(calc(100% - 3rem), var(--reading));
   margin-inline: auto;
@@ -522,6 +560,56 @@ main { min-height: 65vh; }
 .about-links a { color: var(--accent-dark); font-weight: 650; text-underline-offset: 0.22em; }
 .about-layout .prose { width: auto; margin: 0; padding: 0; }
 
+.resource-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.42fr);
+  gap: clamp(3rem, 8vw, 7rem);
+  align-items: end;
+  padding: clamp(4rem, 9vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
+}
+.resource-hero .page-title { max-width: 48rem; margin-top: 1.3rem; font-size: clamp(3.3rem, 7vw, 6.3rem); }
+.resource-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2.2rem; }
+.resource-summary {
+  position: relative;
+  padding: 2rem;
+  border-top: 0.3rem solid var(--coral);
+  background: var(--ink);
+  color: var(--paper);
+}
+.resource-summary::before {
+  position: absolute;
+  top: -2.2rem;
+  right: 1.4rem;
+  width: 4.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--gold);
+  content: "";
+  mix-blend-mode: multiply;
+}
+.resource-summary .section-kicker { color: #f0bd66; }
+.resource-summary ul { margin: 1rem 0 0; padding-left: 1.1rem; color: rgba(251, 248, 241, 0.78); }
+.resource-summary li { margin-bottom: 0.65rem; }
+.resource-layout {
+  display: grid;
+  grid-template-columns: minmax(0, var(--reading)) minmax(15rem, 1fr);
+  gap: clamp(3rem, 8vw, 7rem);
+  align-items: start;
+  padding-top: clamp(4rem, 8vw, 7rem);
+  border-top: 1px solid var(--ink);
+}
+.resource-prose { width: auto; margin: 0; }
+.resource-side-note {
+  position: sticky;
+  top: 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.resource-side-note p:not(.section-kicker) { margin: 0.7rem 0 1.1rem; }
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -562,6 +650,7 @@ main { min-height: 65vh; }
   .article-header { width: min(calc(100% - 2rem), 62rem); text-align: left; }
   .article-meta { justify-content: flex-start; }
   .prose, .article-footer { width: min(calc(100% - 2rem), var(--reading)); }
+  .article-resource { width: min(calc(100% - 2rem), var(--reading)); }
   .prose { font-size: 1.2rem; line-height: 1.68; }
   .prose blockquote { margin: 2.5rem 0; padding: 0.25rem 0 0.25rem 1.25rem; }
   .about-layout { grid-template-columns: 1fr; gap: 2rem; }
@@ -570,6 +659,12 @@ main { min-height: 65vh; }
   .about-layout .prose h2 { font-size: 1.75rem; hyphens: auto; }
   .about-aside { width: 100%; min-width: 0; max-width: 24rem; }
   .about-portrait-frame { max-width: 13rem; }
+  .resource-hero, .resource-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .resource-hero { padding-top: 4.5rem; }
+  .resource-hero .page-title { font-size: clamp(3rem, 13vw, 4.5rem); hyphens: auto; }
+  .resource-actions { align-items: stretch; flex-direction: column; }
+  .resource-prose { width: 100%; }
+  .resource-side-note { position: static; margin-bottom: 4rem; }
   .site-footer { flex-direction: column; }
 }
 

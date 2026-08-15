@@ -129,7 +129,7 @@ function layout({
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   ${imageUrl ? `<meta name="twitter:image" content="${imageUrl}">` : ""}
-  <link rel="stylesheet" href="${href("/styles.css?v=20260815-editorial")}">
+  <link rel="stylesheet" href="${href("/styles.css?v=20260815-management-cycle")}">
   ${jsonLd ? `<script type="application/ld+json">${jsonLd}</script>` : ""}
 </head>
 <body>
@@ -204,6 +204,16 @@ function readerCta() {
       <a class="button button-secondary" href="${site.contact}">Обсудить задачу</a>
     </div>
   </section>`;
+}
+
+function articleResource(article) {
+  if (!article.resourceUrl) return "";
+  return `<aside class="article-resource" aria-labelledby="article-resource-${article.slug}">
+    <p class="section-kicker">Практический материал</p>
+    <h2 id="article-resource-${article.slug}">${escapeHtml(article.resourceTitle || "Шаблон к статье")}</h2>
+    <p>${escapeHtml(article.resourceDescription || "Готовая рабочая форма, которую можно адаптировать под свою компанию.")}</p>
+    <a class="button button-primary" href="${href(article.resourceUrl)}">Открыть и скачать шаблон</a>
+  </aside>`;
 }
 
 async function loadArticles() {
@@ -354,7 +364,8 @@ async function build() {
         <p class="article-dek">${escapeHtml(article.description)}</p>
         <div class="article-meta"><span><time datetime="${article.date}">${formatDate(article.date)}</time></span><span>${article.minutes} мин чтения</span></div>
       </header>
-      <div class="prose">${renderMarkdown(article.body)}</div>
+      <div class="prose${article.resourceUrl ? " prose-with-resource" : ""}">${renderMarkdown(article.body)}</div>
+      ${articleResource(article)}
       <footer class="article-footer">
         <a class="text-link" href="${href("/articles/")}">← Все статьи</a>
         <div class="author-block"><img class="author-photo" src="${href(site.profile.image)}" alt="" width="64" height="64" loading="lazy"><p><a class="author-name" href="${href("/about/")}"><strong>${site.name}</strong></a><br>${site.role}</p></div>
@@ -411,7 +422,61 @@ async function build() {
   const aboutJsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "ProfilePage", "@id": absolute("/about/"), mainEntity: personSchema() });
   await writePage("/about/", layout({ title: about.data.seoTitle || `${about.data.title} — ${site.name}`, description: about.data.description, pathname: "/about/", active: "about", image: "/og/editorial.png", content: aboutContent, jsonLd: aboutJsonLd }));
 
-  const urls = ["/", "/articles/", "/about/", ...articles.map(articlePath), ...populatedCategories.map((category) => `/topics/${category.slug}/`)];
+  const resourceSource = await readFile(path.join(root, "content/pages/standart-upravlencheskih-vstrech.md"), "utf8");
+  const resource = parseFrontMatter(resourceSource, "content/pages/standart-upravlencheskih-vstrech.md");
+  const resourcePath = `/materials/${resource.data.slug}/`;
+  const resourceDownloadPath = `/templates/${resource.data.downloadName}`;
+  const resourceContent = `<section class="shell resource-hero">
+    <div>
+      <p class="eyebrow">Практический инструмент</p>
+      <h1 class="page-title">${escapeHtml(resource.data.title)}</h1>
+      <p class="page-intro">${escapeHtml(resource.data.description)}</p>
+      <div class="resource-actions">
+        <a class="button button-primary" href="${href(resourceDownloadPath)}" download>Скачать шаблон в Markdown</a>
+        <a class="button button-secondary" href="${href("/articles/tsikl-upravlencheskih-vstrech/")}">Прочитать статью</a>
+      </div>
+    </div>
+    <aside class="resource-summary" aria-label="Содержание шаблона">
+      <p class="section-kicker">Внутри</p>
+      <ul>
+        <li>четыре уровня регулярного цикла;</li>
+        <li>форматы встреч по событию;</li>
+        <li>критерии участия собственника;</li>
+        <li>карточка встречи и протокол решения.</li>
+      </ul>
+    </aside>
+  </section>
+  <section class="shell resource-layout">
+    <div class="prose resource-prose">${renderMarkdown(resource.body)}</div>
+    <aside class="resource-side-note">
+      <p class="section-kicker">Как применять</p>
+      <p>Начните с минимального цикла и в течение месяца фиксируйте принятые решения. Затем уберите встречи без результата и уточните пороги участия собственника.</p>
+      <a class="text-link" href="${site.contact}">Обсудить настройку →</a>
+    </aside>
+  </section>`;
+  const resourceJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: resource.data.title,
+    description: resource.data.description,
+    url: absolute(resourcePath),
+    image: absolute(resource.data.image),
+    inLanguage: site.language,
+    author: personSchema(),
+  });
+  await writePage(resourcePath, layout({
+    title: `${resource.data.title} — ${site.name}`,
+    description: resource.data.description,
+    pathname: resourcePath,
+    active: "articles",
+    image: resource.data.image,
+    content: resourceContent,
+    jsonLd: resourceJsonLd,
+  }));
+  await mkdir(path.join(out, "templates"), { recursive: true });
+  await writeFile(path.join(out, "templates", resource.data.downloadName), `# ${resource.data.title}\n\n${resource.body}\n`);
+
+  const urls = ["/", "/articles/", "/about/", resourcePath, ...articles.map(articlePath), ...populatedCategories.map((category) => `/topics/${category.slug}/`)];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${escapeXml(absolute(url))}</loc></url>`).join("\n")}\n</urlset>\n`;
   await writeFile(path.join(out, "sitemap.xml"), sitemap);
   await writeFile(path.join(out, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${absolute("/sitemap.xml")}\n`);

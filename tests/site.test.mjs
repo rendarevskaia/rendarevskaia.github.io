@@ -15,7 +15,7 @@ test("главная страница содержит имя, навигаци�
   assert.match(html, /Три направления/);
   assert.match(html, /images\/brand\/elena-editorial-hero\.webp/);
   assert.match(html, /class="section section-band"/);
-  assert.match(html, /styles\.css\?v=20260815-editorial/);
+  assert.match(html, /styles\.css\?v=20260815-management-cycle/);
   assert.doesNotMatch(html, /topics\/biznes\//);
   assert.match(html, /rel="canonical"/);
   assert.match(html, /rel="icon"/);
@@ -164,6 +164,27 @@ test("все статьи имеют собственные изображени
 test("файл подтверждения Google публикуется в корне сайта", async () => {
   const verification = await read("google1b27122ea4d5af23.html");
   assert.equal(verification.trim(), "google-site-verification: google1b27122ea4d5af23.html");
+});
+
+test("статья о цикле встреч связана с рабочим шаблоном", async () => {
+  const [article, sourceArticle, resource, template, sitemap] = await Promise.all([
+    read("articles/tsikl-upravlencheskih-vstrech/index.html"),
+    read("articles/nalog-na-neupravlyaemost/index.html"),
+    read("materials/standart-upravlencheskih-vstrech/index.html"),
+    read("templates/standart-upravlencheskih-vstrech.md"),
+    read("sitemap.xml"),
+  ]);
+  assert.match(article, /Четыре уровня управленческого ритма/);
+  assert.match(article, /class="article-resource"/);
+  assert.match(article, /href="\/materials\/standart-upravlencheskih-vstrech\/"/);
+  assert.match(sourceArticle, /ритм управленческих встреч и критерии вопросов/);
+  assert.match(sourceArticle, /href="\/articles\/tsikl-upravlencheskih-vstrech\/"/);
+  assert.match(resource, /Практический инструмент/);
+  assert.match(resource, /Скачать шаблон в Markdown/);
+  assert.match(resource, /href="\/templates\/standart-upravlencheskih-vstrech\.md" download/);
+  assert.match(template, /## Карточка встречи/);
+  assert.match(template, /## Протокол решения/);
+  assert.match(sitemap, /materials\/standart-upravlencheskih-vstrech\//);
 });
 
 test("внутренние ссылки ведут на собранные страницы и файлы", async () => {

@@ -7,7 +7,7 @@ category: "управление"
 slug: "strategicheskaya-sessiya-rezultat-363-dnya"
 draft: false
 image: "/og/strategicheskaya-sessiya-rezultat-363-dnya.png"
-related: "nastroika-1s-ne-lechit-neupravlyaemost,soprotivlenie-izmeneniyam-i-predskazuemost,trevoga-sobstvennika-karta-resheniy"
+related: "tsikl-upravlencheskih-vstrech,nastroika-1s-ne-lechit-neupravlyaemost,soprotivlenie-izmeneniyam-i-predskazuemost"
 ---
 
 Качество стратегической сессии трудно оценить в день её завершения.

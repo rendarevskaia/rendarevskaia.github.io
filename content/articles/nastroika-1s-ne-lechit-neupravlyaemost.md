@@ -7,7 +7,7 @@ category: "стратегия"
 slug: "nastroika-1s-ne-lechit-neupravlyaemost"
 draft: false
 image: "/og/nastroika-1s-ne-lechit-neupravlyaemost.png"
-related: "nalog-na-neupravlyaemost,finansovaya-sluzhba-obsluzhivaet-haos,strategicheskaya-sessiya-rezultat-363-dnya"
+related: "tsikl-upravlencheskih-vstrech,nalog-na-neupravlyaemost,finansovaya-sluzhba-obsluzhivaet-haos"
 ---
 
 Иногда клиент приходит с очень конкретным запросом: «Нам нужно просто настроить 1С».

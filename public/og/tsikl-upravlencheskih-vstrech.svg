@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#fbf8f1"/>
+  <rect x="0" y="0" width="24" height="630" fill="#007b7c"/>
+  <circle cx="1036" cy="98" r="190" fill="#e45b3f" opacity="0.96"/>
+  <circle cx="1036" cy="98" r="118" fill="#fbf8f1"/>
+  <path d="M850 504C940 410 1064 402 1182 468" fill="none" stroke="#007b7c" stroke-width="3"/>
+  <path d="M890 545C974 476 1082 475 1180 526" fill="none" stroke="#c58a35" stroke-width="2"/>
+  <rect x="74" y="64" width="9" height="72" fill="#c58a35"/>
+  <text x="108" y="84" fill="#007b7c" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="3">ЕЛЕНА РЕНДАРЕВСКАЯ</text>
+  <text x="74" y="220" fill="#111714" font-family="Georgia, serif" font-size="78" font-weight="700">Цикл</text>
+  <text x="74" y="300" fill="#111714" font-family="Georgia, serif" font-size="68" font-weight="700">управленческих</text>
+  <text x="74" y="380" fill="#111714" font-family="Georgia, serif" font-size="78" font-weight="700">встреч</text>
+  <text x="78" y="432" fill="#5c5a52" font-family="Arial, sans-serif" font-size="24">От срочности — к ритму решений</text>
+  <g font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="1">
+    <rect x="76" y="492" width="128" height="55" fill="#007b7c"/>
+    <text x="102" y="527" fill="#fbf8f1">ДЕНЬ</text>
+    <rect x="216" y="492" width="160" height="55" fill="#111714"/>
+    <text x="242" y="527" fill="#fbf8f1">НЕДЕЛЯ</text>
+    <rect x="388" y="492" width="160" height="55" fill="#c58a35"/>
+    <text x="413" y="527" fill="#111714">МЕСЯЦ</text>
+    <rect x="560" y="492" width="184" height="55" fill="#e45b3f"/>
+    <text x="585" y="527" fill="#fbf8f1">КВАРТАЛ</text>
+  </g>
+  <rect x="792" y="464" width="20" height="20" fill="#111714" transform="rotate(45 802 474)"/>
+</svg>

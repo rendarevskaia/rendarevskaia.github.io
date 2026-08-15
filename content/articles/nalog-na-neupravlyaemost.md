@@ -7,7 +7,7 @@ category: "управление"
 slug: "nalog-na-neupravlyaemost"
 draft: false
 image: "/og/nalog-na-neupravlyaemost.png"
-related: "finansovaya-sluzhba-obsluzhivaet-haos,nastroika-1s-ne-lechit-neupravlyaemost,trevoga-sobstvennika-karta-resheniy"
+related: "tsikl-upravlencheskih-vstrech,finansovaya-sluzhba-obsluzhivaet-haos,nastroika-1s-ne-lechit-neupravlyaemost"
 ---
 
 У неуправляемого бизнеса есть налог. Он не отражается отдельной строкой в отчётности, но компания платит его каждый месяц.
@@ -75,7 +75,7 @@ related: "finansovaya-sluzhba-obsluzhivaet-haos,nastroika-1s-ne-lechit-neupravly
 
 Система не обязана быть тяжёлой. Хорошее управление уменьшает количество согласований, потому что заранее определяет границы решений.
 
-У сотрудника есть понятная зона ответственности. У руководителя — несколько показателей, по которым видно отклонение. У собственника — ритм встреч и уровень вопросов, требующих именно его участия.
+У сотрудника есть понятная зона ответственности. У руководителя — несколько показателей, по которым видно отклонение. У собственника — [ритм управленческих встреч и критерии вопросов, требующих именно его участия](/articles/tsikl-upravlencheskih-vstrech/).
 
 В такой компании проблема не исчезает магически. Она раньше становится видимой и реже требует героизма.
 
