@@ -42,6 +42,20 @@ test("эссе «Шуба» опубликовано с фотографией �
   assert.match(topic, /articles\/shuba\//);
 });
 
+test("разбор «Озарка» опубликован в теме «управление»", async () => {
+  const [html, archive, topic] = await Promise.all([
+    read("articles/ozark-dlya-predprinimateley/index.html"),
+    read("articles/index.html"),
+    read("topics/upravlenie/index.html"),
+  ]);
+  assert.match(html, /<h1>«Озарк» для предпринимателей: теория систем в действии<\/h1>/);
+  assert.match(html, /src="\/og\/ozark\.png"/);
+  assert.match(html, /property="og:image" content="https:\/\/rendarevskaia\.github\.io\/og\/ozark\.png"/);
+  assert.match(html, /href="https:\/\/t\.me\/elena_rendarevskaya"/);
+  assert.match(archive, /articles\/ozark-dlya-predprinimateley\//);
+  assert.match(topic, /articles\/ozark-dlya-predprinimateley\//);
+});
+
 test("служебные файлы существуют и содержат публичные URL", async () => {
   const [sitemap, robots, rss] = await Promise.all([
     read("sitemap.xml"),
