@@ -42,6 +42,7 @@ test("первая статья собрана со всеми метаданн�
   assert.match(html, /og:type" content="article"/);
   assert.match(html, /article:published_time" content="2026-08-15"/);
   assert.match(html, /article:section" content="финансы"/);
+  assert.match(html, /property="og:image" content="https:\/\/rendarevskaia\.github\.io\/og\/wildberries-sellers-capital\.png"/);
   assert.match(html, /Связанные материалы/);
   assert.match(html, /Новые тексты — в Telegram/);
   assert.match(html, /Подписаться/);
@@ -140,6 +141,21 @@ test("каждая статья ведёт к подписке и реальны
     assert.match(html, /class="reader-cta"/, slug);
     assert.match(html, /class="related-materials"/, slug);
     assert.doesNotMatch(html, /будущей подборки/, slug);
+  }
+});
+
+test("ключевые статьи имеют собственные изображения для Telegram", async () => {
+  const slugs = [
+    "wildberries-sellers-capital",
+    "kognitivnye-iskazheniya-v-biznese",
+    "novosti-keisy-i-iskazhennaya-strategiya",
+    "plohie-resheniya-i-chuzhie-ramki",
+    "predprinimatel-protiv-effekta-tolpy",
+  ];
+  for (const slug of slugs) {
+    const html = await read(`articles/${slug}/index.html`);
+    assert.match(html, new RegExp(`property="og:image" content="https://rendarevskaia\\.github\\.io/og/${slug}\\.png"`), slug);
+    await assert.doesNotReject(access(new URL(`../public/og/${slug}.png`, import.meta.url)), slug);
   }
 });
 

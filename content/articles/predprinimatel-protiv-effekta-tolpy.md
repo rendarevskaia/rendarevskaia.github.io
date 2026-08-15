@@ -6,7 +6,7 @@ author: "Елена Рендаревская"
 category: "мышление"
 slug: "predprinimatel-protiv-effekta-tolpy"
 draft: false
-image: "/og/editorial.png"
+image: "/og/predprinimatel-protiv-effekta-tolpy.png"
 related: "kognitivnye-iskazheniya-v-biznese,novosti-keisy-i-iskazhennaya-strategiya,plohie-resheniya-i-chuzhie-ramki"
 ---
 

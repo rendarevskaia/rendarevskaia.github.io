@@ -6,7 +6,7 @@ author: "Елена Рендаревская"
 category: "мышление"
 slug: "plohie-resheniya-i-chuzhie-ramki"
 draft: false
-image: "/og/editorial.png"
+image: "/og/plohie-resheniya-i-chuzhie-ramki.png"
 related: "kognitivnye-iskazheniya-v-biznese,predprinimatel-protiv-effekta-tolpy,novosti-keisy-i-iskazhennaya-strategiya"
 ---
 

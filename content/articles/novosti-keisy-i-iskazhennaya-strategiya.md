@@ -6,7 +6,7 @@ author: "Елена Рендаревская"
 category: "мышление"
 slug: "novosti-keisy-i-iskazhennaya-strategiya"
 draft: false
-image: "/og/editorial.png"
+image: "/og/novosti-keisy-i-iskazhennaya-strategiya.png"
 related: "kognitivnye-iskazheniya-v-biznese,predprinimatel-protiv-effekta-tolpy,plohie-resheniya-i-chuzhie-ramki"
 ---
 

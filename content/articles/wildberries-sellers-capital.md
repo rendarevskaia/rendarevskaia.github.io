@@ -6,7 +6,7 @@ author: "Елена Рендаревская"
 category: "финансы"
 slug: "wildberries-sellers-capital"
 draft: false
-image: "/og/editorial.png"
+image: "/og/wildberries-sellers-capital.png"
 ---
 
 Последние недели я работаю с предпринимателями, которые в разной степени пострадали от атак на логистические центры Wildberries.
