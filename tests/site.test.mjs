@@ -86,6 +86,11 @@ test("служебные файлы существуют и содержат п�
   assert.match(rss, /<rss version="2.0">/);
 });
 
+test("файл подтверждения Google публикуется в корне сайта", async () => {
+  const verification = await read("google1b27122ea4d5af23.html");
+  assert.equal(verification.trim(), "google-site-verification: google1b27122ea4d5af23.html");
+});
+
 test("внутренние ссылки ведут на собранные страницы и файлы", async () => {
   const dist = new URL("../dist/", import.meta.url);
   const files = (await readdir(dist, { recursive: true })).filter((file) => file.endsWith(".html"));
