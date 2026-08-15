@@ -7,11 +7,19 @@ const read = (file) => readFile(new URL(`../dist/${file}`, import.meta.url), "ut
 test("главная страница содержит имя, навигацию и SEO", async () => {
   const html = await read("index.html");
   assert.match(html, /Елена Рендаревская/);
+  assert.match(html, /Разбираю, как предпринимателям принимать финансовые и управленческие решения/);
+  assert.match(html, /С чего начать/);
+  assert.match(html, /Главные материалы/);
   assert.match(html, /Новые материалы/);
+  assert.match(html, /Подписаться в Telegram/);
+  assert.match(html, /Три направления/);
+  assert.doesNotMatch(html, /topics\/biznes\//);
   assert.match(html, /rel="canonical"/);
+  assert.match(html, /rel="icon"/);
   assert.match(html, /property="og:image"/);
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /"@type":"WebSite"/);
+  assert.match(html, /"@type":"CollectionPage"/);
   assert.match(html, /"alternateName":"Elena Rendarevskaya"/);
 });
 
@@ -32,7 +40,13 @@ test("первая статья собрана со всеми метаданн�
   assert.match(html, /Склады заработают раньше, чем селлеры вернут потерянные деньги/);
   assert.match(html, /мин чтения/);
   assert.match(html, /og:type" content="article"/);
+  assert.match(html, /article:published_time" content="2026-08-15"/);
+  assert.match(html, /article:section" content="финансы"/);
   assert.match(html, /Связанные материалы/);
+  assert.match(html, /Новые тексты — в Telegram/);
+  assert.match(html, /Подписаться/);
+  assert.match(html, /Обсудить задачу/);
+  assert.doesNotMatch(html, /Этот блок подготовлен для будущей подборки/);
   assert.match(html, /<article>/);
   assert.match(html, /Источники и документы/);
   assert.match(
@@ -96,8 +110,37 @@ test("служебные файлы существуют и содержат п�
     read("rss.xml"),
   ]);
   assert.match(sitemap, /wildberries-sellers-capital/);
+  assert.match(sitemap, /topics\/finansy\//);
+  assert.doesNotMatch(sitemap, /topics\/biznes\//);
   assert.match(robots, /Sitemap:/);
   assert.match(rss, /<rss version="2.0">/);
+});
+
+test("пустые темы доступны для будущих материалов, но не индексируются", async () => {
+  const [emptyTopic, populatedTopic] = await Promise.all([
+    read("topics/biznes/index.html"),
+    read("topics/finansy/index.html"),
+  ]);
+  assert.match(emptyTopic, /name="robots" content="noindex,follow"/);
+  assert.doesNotMatch(populatedTopic, /name="robots" content="noindex/);
+});
+
+test("каждая статья ведёт к подписке и реальным связанным материалам", async () => {
+  const articles = [
+    "kognitivnye-iskazheniya-v-biznese",
+    "novosti-keisy-i-iskazhennaya-strategiya",
+    "ozark-dlya-predprinimateley",
+    "plohie-resheniya-i-chuzhie-ramki",
+    "predprinimatel-protiv-effekta-tolpy",
+    "shuba",
+    "wildberries-sellers-capital",
+  ];
+  for (const slug of articles) {
+    const html = await read(`articles/${slug}/index.html`);
+    assert.match(html, /class="reader-cta"/, slug);
+    assert.match(html, /class="related-materials"/, slug);
+    assert.doesNotMatch(html, /будущей подборки/, slug);
+  }
 });
 
 test("файл подтверждения Google публикуется в корне сайта", async () => {

@@ -4,11 +4,37 @@ export const site = {
   name: "Елена Рендаревская",
   alternateName: "Elena Rendarevskaya",
   role: "предприниматель, CFO-консультант, стратегический модератор",
-  title: "Елена Рендаревская — статьи о бизнесе, финансах и стратегии",
+  title: "Елена Рендаревская — финансы, стратегия и управление бизнесом",
   description:
-    "Авторские материалы Елены Рендаревской о бизнесе, финансах, управлении, стратегии, предпринимательстве и человеке в работе.",
+    "Разборы для предпринимателей о финансах, стратегии, управлении, системах и человеке в работе. Автор — Елена Рендаревская.",
   defaultUrl: "https://rendarevskaia.github.io",
   language: "ru-RU",
+  telegram: "https://t.me/rendarevskaya",
+  contact: "https://t.me/Elena_Rendarevskaya",
+  home: {
+    featuredSlugs: [
+      "wildberries-sellers-capital",
+      "ozark-dlya-predprinimateley",
+      "kognitivnye-iskazheniya-v-biznese",
+    ],
+    pillars: [
+      {
+        title: "Деньги и устойчивость бизнеса",
+        description: "Капитал, управленческий учёт, финансовые модели и цена решений.",
+        category: "финансы",
+      },
+      {
+        title: "Стратегия и системы управления",
+        description: "Бизнес-модели, обратные связи, процессы и регулярный менеджмент.",
+        category: "управление",
+      },
+      {
+        title: "Решения, мышление и человек",
+        description: "Когнитивные искажения, предпринимательское мышление и человек в работе.",
+        category: "мышление",
+      },
+    ],
+  },
   profile: {
     image: "/images/elena-rendarevskaya.jpg",
     sameAs: [
