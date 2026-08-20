@@ -187,6 +187,26 @@ test("статья о цикле встреч связана с рабочим �
   assert.match(sitemap, /materials\/standart-upravlencheskih-vstrech\//);
 });
 
+test("статья о спиральной динамике опубликована с памяткой и связана с управленческим циклом", async () => {
+  const [article, cycle, archive, topic, sitemap] = await Promise.all([
+    read("articles/spiralnaya-dinamika-v-upravlenii/index.html"),
+    read("articles/tsikl-upravlencheskih-vstrech/index.html"),
+    read("articles/index.html"),
+    read("topics/upravlenie/index.html"),
+    read("sitemap.xml"),
+  ]);
+  assert.match(article, /Не цвет человека, а логика решения/);
+  assert.match(article, /Как спиральная динамика связана с управленческим циклом/);
+  assert.match(article, /href="\/articles\/tsikl-upravlencheskih-vstrech\/"/);
+  assert.match(article, /href="\/materials\/spiralnaya-dinamika-pamyatka\.pdf" download/);
+  assert.match(article, /Скачать памятку в PDF/);
+  assert.match(cycle, /href="\/articles\/spiralnaya-dinamika-v-upravlenii\/"/);
+  assert.match(archive, /articles\/spiralnaya-dinamika-v-upravlenii\//);
+  assert.match(topic, /articles\/spiralnaya-dinamika-v-upravlenii\//);
+  assert.match(sitemap, /articles\/spiralnaya-dinamika-v-upravlenii\//);
+  await assert.doesNotReject(access(new URL("../dist/materials/spiralnaya-dinamika-pamyatka.pdf", import.meta.url)));
+});
+
 test("внутренние ссылки ведут на собранные страницы и файлы", async () => {
   const dist = new URL("../dist/", import.meta.url);
   const files = (await readdir(dist, { recursive: true })).filter((file) => file.endsWith(".html"));

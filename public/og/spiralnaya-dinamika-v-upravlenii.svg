@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#fbf8f1"/>
+  <rect x="0" y="0" width="24" height="630" fill="#007b7c"/>
+  <g transform="translate(890 315)" fill="none" stroke-width="22">
+    <path d="M0 0C0-122 192-122 192 0C192 154-70 169-170 31C-270-107-170-282 15-278C208-275 335-111 302 78" stroke="#e45b3f"/>
+    <path d="M0 0C0-76 118-76 118 0C118 92-41 102-101 19" stroke="#c58a35"/>
+    <path d="M0 0C0-37 58-37 58 0C58 45-20 50-50 10" stroke="#007b7c"/>
+  </g>
+  <g>
+    <rect x="72" y="64" width="10" height="72" fill="#c58a35"/>
+    <text x="108" y="84" fill="#007b7c" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="3">ЕЛЕНА РЕНДАРЕВСКАЯ</text>
+    <text x="72" y="218" fill="#111714" font-family="Georgia, serif" font-size="72" font-weight="700">Спиральная</text>
+    <text x="72" y="295" fill="#111714" font-family="Georgia, serif" font-size="72" font-weight="700">динамика</text>
+    <text x="76" y="347" fill="#5c5a52" font-family="Arial, sans-serif" font-size="25">Не цвет человека —</text>
+    <text x="76" y="383" fill="#5c5a52" font-family="Arial, sans-serif" font-size="25">логика конкретного решения</text>
+  </g>
+  <g transform="translate(76 485)">
+    <circle cx="18" cy="18" r="18" fill="#bda579"/>
+    <circle cx="68" cy="18" r="18" fill="#7a4d94"/>
+    <circle cx="118" cy="18" r="18" fill="#d04a3f"/>
+    <circle cx="168" cy="18" r="18" fill="#376dad"/>
+    <circle cx="218" cy="18" r="18" fill="#ee8b0c"/>
+    <circle cx="268" cy="18" r="18" fill="#4aa161"/>
+    <circle cx="318" cy="18" r="18" fill="#e5b900"/>
+    <circle cx="368" cy="18" r="18" fill="#24979a"/>
+  </g>
+  <text x="76" y="566" fill="#111714" font-family="Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="1.5">КОНТЕКСТ · РЕШЕНИЕ · УПРАВЛЕНЧЕСКИЙ РЕЖИМ</text>
+</svg>

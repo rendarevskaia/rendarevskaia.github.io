@@ -212,7 +212,7 @@ function articleResource(article) {
     <p class="section-kicker">Практический материал</p>
     <h2 id="article-resource-${article.slug}">${escapeHtml(article.resourceTitle || "Шаблон к статье")}</h2>
     <p>${escapeHtml(article.resourceDescription || "Готовая рабочая форма, которую можно адаптировать под свою компанию.")}</p>
-    <a class="button button-primary" href="${href(article.resourceUrl)}">Открыть и скачать шаблон</a>
+    <a class="button button-primary" href="${href(article.resourceUrl)}"${article.resourceDownload === true ? " download" : ""}>${escapeHtml(article.resourceButton || "Открыть и скачать шаблон")}</a>
   </aside>`;
 }
 

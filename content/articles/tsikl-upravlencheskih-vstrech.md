@@ -7,7 +7,7 @@ category: "управление"
 slug: "tsikl-upravlencheskih-vstrech"
 draft: false
 image: "/og/tsikl-upravlencheskih-vstrech.png"
-related: "nalog-na-neupravlyaemost,strategicheskaya-sessiya-rezultat-363-dnya,nastroika-1s-ne-lechit-neupravlyaemost"
+related: "spiralnaya-dinamika-v-upravlenii,nalog-na-neupravlyaemost,strategicheskaya-sessiya-rezultat-363-dnya"
 resourceUrl: "/materials/standart-upravlencheskih-vstrech/"
 resourceTitle: "Стандарт управленческих встреч"
 resourceDescription: "Готовая структура ежедневных, еженедельных, ежемесячных и квартальных встреч, карточка встречи и протокол решения."
@@ -29,7 +29,7 @@ resourceDescription: "Готовая структура ежедневных, е
 
 Если ответы не определены, встреча превращается в универсальный контейнер. В неё одновременно попадают статусы, операционные блокировки, поиск причин, идеи и стратегические развилки. Участники переключаются между разными режимами мышления, повестка расползается, решения растворяются в обсуждении.
 
-Хороший цикл разводит эти задачи по уровням.
+Хороший цикл разводит эти задачи по уровням. Но одного расписания недостаточно: команде важно понимать, **в какой логике** она принимает конкретное решение. [Спиральная динамика помогает увидеть этот режим и проверить, соответствует ли он задаче](/articles/spiralnaya-dinamika-v-upravlenii/).
 
 ## Четыре уровня управленческого ритма
 
