@@ -13,10 +13,10 @@ export const site = {
   contact: "https://t.me/Elena_Rendarevskaya",
   home: {
     featuredSlugs: [
+      "chto-to-proishodit-s-dengami",
       "ai-native-finansovaya-funktsiya",
       "finansovaya-sluzhba-obsluzhivaet-haos",
       "strategicheskaya-sessiya-rezultat-363-dnya",
-      "wildberries-sellers-capital",
     ],
     pillars: [
       {

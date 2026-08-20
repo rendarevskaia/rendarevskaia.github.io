@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Что-то происходит с деньгами</title>
+  <desc id="desc">Редакционная обложка о связи финансов, процессов, решений и роли собственника</desc>
+  <rect width="1200" height="630" fill="#f7f0e3"/>
+  <rect x="0" y="0" width="365" height="630" fill="#111714"/>
+  <circle cx="182" cy="173" r="112" fill="#e45b3f"/>
+  <circle cx="182" cy="173" r="50" fill="#f7f0e3"/>
+  <path d="M79 359 C126 303 201 410 252 352 C289 310 311 333 339 369" fill="none" stroke="#007b7c" stroke-width="9"/>
+  <path d="M79 419 C136 361 202 477 267 404 C299 368 327 389 352 414" fill="none" stroke="#c58a35" stroke-width="5"/>
+  <g fill="#111714" font-family="Arial, Helvetica, sans-serif">
+    <text x="420" y="185" font-size="70" font-weight="700" letter-spacing="-2">Что-то происходит</text>
+    <text x="420" y="265" font-size="70" font-weight="700" letter-spacing="-2">с деньгами</text>
+    <text x="424" y="330" font-size="27" fill="#46514c">Цифры показывают, как работает система</text>
+  </g>
+  <g transform="translate(425 395)" font-family="Arial, Helvetica, sans-serif" font-size="22">
+    <rect x="0" y="0" width="168" height="52" rx="26" fill="#007b7c"/><text x="37" y="33" fill="#f7f0e3">ДАННЫЕ</text>
+    <rect x="184" y="0" width="184" height="52" rx="26" fill="#c58a35"/><text x="214" y="33" fill="#111714">ПРОЦЕССЫ</text>
+    <rect x="384" y="0" width="196" height="52" rx="26" fill="#e45b3f"/><text x="414" y="33" fill="#f7f0e3">РЕШЕНИЯ</text>
+  </g>
+  <rect x="365" y="520" width="835" height="110" fill="#007b7c"/>
+  <text x="425" y="584" fill="#f7f0e3" font-family="Arial, Helvetica, sans-serif" font-size="23" letter-spacing="1.2">ЕЛЕНА РЕНДАРЕВСКАЯ · ФИНАНСЫ</text>
+</svg>

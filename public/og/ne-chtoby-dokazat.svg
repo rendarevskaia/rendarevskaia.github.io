@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Не чтобы доказать, а чтобы узнать, кем я стану</title>
+  <desc id="desc">Редакционная обложка личного эссе о возвращении к ходьбе, беге и выборе жизни</desc>
+  <rect width="1200" height="630" fill="#f7f0e3"/>
+  <rect x="0" y="0" width="1200" height="112" fill="#007b7c"/>
+  <circle cx="1047" cy="437" r="270" fill="#111714"/>
+  <circle cx="1047" cy="437" r="172" fill="#e45b3f"/>
+  <circle cx="1047" cy="437" r="76" fill="#f7f0e3"/>
+  <path d="M55 454 C211 327 329 570 488 411 C625 274 748 367 892 247" fill="none" stroke="#c58a35" stroke-width="7"/>
+  <circle cx="55" cy="454" r="13" fill="#007b7c"/>
+  <circle cx="488" cy="411" r="13" fill="#007b7c"/>
+  <circle cx="892" cy="247" r="13" fill="#007b7c"/>
+  <g fill="#111714" font-family="Arial, Helvetica, sans-serif">
+    <text x="72" y="210" font-size="64" font-weight="700" letter-spacing="-2">Не чтобы доказать,</text>
+    <text x="72" y="282" font-size="64" font-weight="700" letter-spacing="-2">а чтобы узнать,</text>
+    <text x="72" y="354" font-size="64" font-weight="700" letter-spacing="-2">кем я стану</text>
+  </g>
+  <text x="73" y="69" fill="#f7f0e3" font-family="Arial, Helvetica, sans-serif" font-size="23" letter-spacing="1.2">ЕЛЕНА РЕНДАРЕВСКАЯ · ЧЕЛОВЕК И РАБОТА</text>
+  <text x="73" y="535" fill="#46514c" font-family="Arial, Helvetica, sans-serif" font-size="25">От доказательства — к интересу и выбору</text>
+</svg>

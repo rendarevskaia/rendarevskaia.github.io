@@ -7,7 +7,8 @@ const read = (file) => readFile(new URL(`../dist/${file}`, import.meta.url), "ut
 test("главная страница содержит имя, навигацию и SEO", async () => {
   const html = await read("index.html");
   assert.match(html, /Елена Рендаревская/);
-  assert.match(html, /Разбираю, как предпринимателям принимать финансовые и управленческие решения/);
+  assert.match(html, /Вхожу в бизнес через цифры и разбираю систему целиком/);
+  assert.match(html, /articles\/chto-to-proishodit-s-dengami\//);
   assert.match(html, /С чего начать/);
   assert.match(html, /Главные материалы/);
   assert.match(html, /Новые материалы/);
@@ -31,6 +32,10 @@ test("страница автора содержит биографию, фот�
   assert.match(html, /<h1 class="page-title">Елена Рендаревская<\/h1>/);
   assert.match(html, /с 2005 года/);
   assert.match(html, /оборотом более 100 млн рублей/);
+  assert.match(html, /У нас что-то происходит с деньгами/);
+  assert.match(html, /Как я работаю/);
+  assert.match(html, /href="\/articles\/chto-to-proishodit-s-dengami\/"/);
+  assert.match(html, /href="\/articles\/ne-chtoby-dokazat\/"/);
   assert.match(html, /images\/elena-rendarevskaya\.jpg/);
   assert.match(html, /class="about-portrait-frame"/);
   assert.match(html, /"@type":"ProfilePage"/);
@@ -240,6 +245,29 @@ test("история кредита превращена в практическ
   assert.match(archive, /articles\/kredit-obeshchanie-o-budushchem\//);
   assert.match(topic, /articles\/kredit-obeshchanie-o-budushchem\//);
   assert.match(sitemap, /articles\/kredit-obeshchanie-o-budushchem\//);
+});
+
+test("позиционирование усилено экспертной статьёй и личным эссе", async () => {
+  const [expert, personal, archive, finance, human, sitemap] = await Promise.all([
+    read("articles/chto-to-proishodit-s-dengami/index.html"),
+    read("articles/ne-chtoby-dokazat/index.html"),
+    read("articles/index.html"),
+    read("topics/finansy/index.html"),
+    read("topics/chelovek-i-rabota/index.html"),
+    read("sitemap.xml"),
+  ]);
+  assert.match(expert, /Пять слоёв одного финансового симптома/);
+  assert.match(expert, /Как я работаю с таким запросом/);
+  assert.match(expert, /деньги честно показывают, как работает вся система/);
+  assert.match(personal, /От насилия к интересу/);
+  assert.match(personal, /Выбирать жизнь не один раз/);
+  assert.doesNotMatch(personal, /Илона|Ахметгаряева/);
+  assert.match(archive, /articles\/chto-to-proishodit-s-dengami\//);
+  assert.match(archive, /articles\/ne-chtoby-dokazat\//);
+  assert.match(finance, /articles\/chto-to-proishodit-s-dengami\//);
+  assert.match(human, /articles\/ne-chtoby-dokazat\//);
+  assert.match(sitemap, /articles\/chto-to-proishodit-s-dengami\//);
+  assert.match(sitemap, /articles\/ne-chtoby-dokazat\//);
 });
 
 test("внутренние ссылки ведут на собранные страницы и файлы", async () => {
