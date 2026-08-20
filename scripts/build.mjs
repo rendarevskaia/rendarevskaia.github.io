@@ -39,7 +39,7 @@ function personSchema() {
     url: absolute("/about/"),
     image: absolute(site.profile.image),
     jobTitle: site.role,
-    description: "Предприниматель, финансист, CFO-консультант и стратегический модератор. Работает с корпоративными финансами, стратегией и управлением.",
+    description: "Предприниматель, финансист, CFO-консультант, стратегический модератор и практикующий психолог. Работает с корпоративными финансами, стратегией, управлением и психологией решений.",
     knowsAbout: site.profile.knowsAbout,
     sameAs: site.profile.sameAs,
   };
@@ -271,7 +271,7 @@ async function build() {
         <a class="button button-primary" href="#start">Начать с главных материалов</a>
         <a class="button button-secondary" href="${site.telegram}" rel="me">Подписаться в Telegram</a>
       </div>
-      <p class="hero-credentials">В финансах с 2005 года · предпринимательский опыт с выходом из бизнеса · стратегические сессии и консалтинг</p>
+      <p class="hero-credentials">В финансах с 2005 года · практикующий психолог · предпринимательский опыт с выходом из бизнеса</p>
     </div>
     <figure class="hero-art">
       <img src="${href(site.profile.editorialImage)}" alt="Иллюстрированный портрет Елены Рендаревской" width="1122" height="1402" loading="eager" fetchpriority="high">
@@ -408,7 +408,7 @@ async function build() {
       <p class="section-kicker">Коротко</p>
       <dl class="about-facts">
         <div><dt>В финансах</dt><dd>с 2005 года</dd></div>
-        <div><dt>Практика</dt><dd>финансы, стратегия, управление</dd></div>
+        <div><dt>Практика</dt><dd>финансы, управление, психология</dd></div>
         <div><dt>Форматы</dt><dd>консалтинг, сопровождение, стратегические сессии</dd></div>
       </dl>
       <nav class="about-links" aria-label="Публичные профили">

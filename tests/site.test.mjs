@@ -8,6 +8,7 @@ test("главная страница содержит имя, навигаци�
   const html = await read("index.html");
   assert.match(html, /Елена Рендаревская/);
   assert.match(html, /Вхожу в бизнес через цифры и разбираю систему целиком/);
+  assert.match(html, /практикующий психолог/);
   assert.match(html, /articles\/chto-to-proishodit-s-dengami\//);
   assert.match(html, /С чего начать/);
   assert.match(html, /Главные материалы/);
@@ -34,11 +35,14 @@ test("страница автора содержит биографию, фот�
   assert.match(html, /оборотом более 100 млн рублей/);
   assert.match(html, /У нас что-то происходит с деньгами/);
   assert.match(html, /Как я работаю/);
+  assert.match(html, /Психология и бизнес/);
+  assert.match(html, /Я практикующий психолог/);
   assert.match(html, /href="\/articles\/chto-to-proishodit-s-dengami\/"/);
   assert.match(html, /href="\/articles\/ne-chtoby-dokazat\/"/);
   assert.match(html, /images\/elena-rendarevskaya\.jpg/);
   assert.match(html, /class="about-portrait-frame"/);
   assert.match(html, /"@type":"ProfilePage"/);
+  assert.match(html, /психология предпринимателя/);
   assert.match(html, /"sameAs":\["https:\/\/network\.tochka\.com\/expert\/64\/"/);
   assert.match(html, /href="https:\/\/t\.me\/rendarevskaya"/);
   assert.match(html, /href="https:\/\/pro\.rbc\.ru\/demo\/65c44e4c9a794727f4f4f595"/);
