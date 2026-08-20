@@ -225,6 +225,23 @@ test("эссе о понимании обезличено и связано со
   assert.match(sitemap, /articles\/ponyat-slova-no-ne-smysl\//);
 });
 
+test("история кредита превращена в практическую статью для предпринимателя", async () => {
+  const [article, archive, topic, sitemap] = await Promise.all([
+    read("articles/kredit-obeshchanie-o-budushchem/index.html"),
+    read("articles/index.html"),
+    read("topics/finansy/index.html"),
+    read("sitemap.xml"),
+  ]);
+  assert.match(article, /Кредит — это обещание о будущем/);
+  assert.match(article, /Пять вопросов перед кредитом/);
+  assert.match(article, /href="https:\/\/www\.cbr\.ru\/about_br\/history\/"/);
+  assert.match(article, /href="\/articles\/oborot-rastet-biznes-bedneet\/"/);
+  assert.match(article, /href="\/articles\/finansist-v-biznes-krizise\/"/);
+  assert.match(archive, /articles\/kredit-obeshchanie-o-budushchem\//);
+  assert.match(topic, /articles\/kredit-obeshchanie-o-budushchem\//);
+  assert.match(sitemap, /articles\/kredit-obeshchanie-o-budushchem\//);
+});
+
 test("внутренние ссылки ведут на собранные страницы и файлы", async () => {
   const dist = new URL("../dist/", import.meta.url);
   const files = (await readdir(dist, { recursive: true })).filter((file) => file.endsWith(".html"));

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Кредит — это обещание о будущем</title>
+  <desc id="desc">Редакционная обложка статьи о доверии, времени и способности бизнеса вернуть долг</desc>
+  <rect width="1200" height="630" fill="#f7f0e3"/>
+  <rect x="0" y="0" width="330" height="630" fill="#007b7c"/>
+  <circle cx="1110" cy="102" r="190" fill="#111714"/>
+  <circle cx="1110" cy="102" r="106" fill="#e45b3f"/>
+  <path d="M92 128 C172 82 247 82 318 127" fill="none" stroke="#f7f0e3" stroke-width="3"/>
+  <path d="M95 136 L151 284 L214 208 L294 415" fill="none" stroke="#c58a35" stroke-width="8"/>
+  <circle cx="95" cy="136" r="13" fill="#f7f0e3"/>
+  <circle cx="151" cy="284" r="13" fill="#f7f0e3"/>
+  <circle cx="214" cy="208" r="13" fill="#f7f0e3"/>
+  <circle cx="294" cy="415" r="13" fill="#f7f0e3"/>
+  <path d="M356 466 H1128" stroke="#c58a35" stroke-width="3"/>
+  <path d="M845 444 L873 466 L845 488" fill="none" stroke="#c58a35" stroke-width="3"/>
+  <g fill="#111714" font-family="Arial, Helvetica, sans-serif">
+    <text x="390" y="205" font-size="68" font-weight="700" letter-spacing="-2">Кредит — это</text>
+    <text x="390" y="284" font-size="68" font-weight="700" letter-spacing="-2">обещание</text>
+    <text x="390" y="363" font-size="68" font-weight="700" letter-spacing="-2">о будущем</text>
+    <text x="394" y="418" font-size="25" fill="#46514c">Доверие · правила · денежный поток</text>
+  </g>
+  <rect x="330" y="520" width="870" height="110" fill="#111714"/>
+  <text x="390" y="584" fill="#f7f0e3" font-family="Arial, Helvetica, sans-serif" font-size="23" letter-spacing="1.2">ЕЛЕНА РЕНДАРЕВСКАЯ · ФИНАНСЫ</text>
+</svg>
