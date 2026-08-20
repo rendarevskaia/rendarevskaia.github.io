@@ -7,7 +7,7 @@ category: "управление"
 slug: "spiralnaya-dinamika-v-upravlenii"
 draft: false
 image: "/og/spiralnaya-dinamika-v-upravlenii.png"
-related: "tsikl-upravlencheskih-vstrech,nalog-na-neupravlyaemost,soprotivlenie-izmeneniyam-i-predskazuemost"
+related: "ponyat-slova-no-ne-smysl,tsikl-upravlencheskih-vstrech,soprotivlenie-izmeneniyam-i-predskazuemost"
 resourceUrl: "/materials/spiralnaya-dinamika-pamyatka.pdf"
 resourceTitle: "Памятка «Спиральная динамика»"
 resourceDescription: "Восемь ценностных систем на десяти страницах: что движет каждой логикой, как она принимает решения, где полезна и какой риск создаёт."
@@ -36,6 +36,8 @@ resourceDownload: true
 > Какая логика сейчас управляет этим решением, что она нам даёт и соответствует ли задаче?
 
 Так модель превращается из ярлыка в рабочую гипотезу.
+
+Иногда этот переход не происходит с первого чтения: термины знакомы, но система ещё не складывается. [Почему так бывает и как перевести узнавание в действие](/articles/ponyat-slova-no-ne-smysl/), я разобрала отдельно.
 
 ## Восемь логик — в одном контуре
 

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Понять все слова — и не понять смысл</title>
+  <desc id="desc">Редакционная обложка о переходе от отдельных понятий к целостной рабочей модели</desc>
+  <rect width="1200" height="630" fill="#f7f0e3"/>
+  <circle cx="1034" cy="114" r="225" fill="#007b7c"/>
+  <circle cx="1004" cy="146" r="112" fill="#e45b3f"/>
+  <path d="M0 510 C180 428 340 570 524 520 C707 433 815 520 1200 420 L1200 630 L0 630 Z" fill="#111714"/>
+  <path d="M72 110 C225 18 345 43 440 124" fill="none" stroke="#c58a35" stroke-width="3"/>
+  <path d="M76 102 L91 126 L107 99 M142 74 L158 105 L180 76 M214 56 L230 94 L257 63" fill="none" stroke="#c58a35" stroke-width="3"/>
+
+  <g fill="#111714" font-family="Arial, Helvetica, sans-serif">
+    <text x="72" y="205" font-size="70" font-weight="700" letter-spacing="-2">Понять все слова —</text>
+    <text x="72" y="284" font-size="70" font-weight="700" letter-spacing="-2">и не понять смысл</text>
+    <text x="76" y="346" font-size="27" fill="#3e4a44">От информации к рабочей модели</text>
+  </g>
+
+  <g fill="none" stroke="#007b7c" stroke-width="4">
+    <circle cx="112" cy="424" r="13"/>
+    <circle cx="198" cy="404" r="13"/>
+    <circle cx="284" cy="445" r="13"/>
+    <circle cx="375" cy="405" r="13"/>
+  </g>
+  <g stroke="#c58a35" stroke-width="3">
+    <path d="M125 421 L185 407"/>
+    <path d="M210 410 L272 439"/>
+    <path d="M297 440 L362 411"/>
+  </g>
+  <g transform="translate(475 378)">
+    <circle cx="73" cy="70" r="68" fill="#e45b3f"/>
+    <circle cx="73" cy="70" r="32" fill="#f7f0e3"/>
+    <circle cx="73" cy="70" r="9" fill="#111714"/>
+    <path d="M73 5 V37 M73 103 V135 M8 70 H41 M105 70 H138 M27 24 L50 47 M96 93 L119 116 M119 24 L96 47 M50 93 L27 116" stroke="#f7f0e3" stroke-width="5"/>
+  </g>
+
+  <text x="75" y="582" fill="#f7f0e3" font-family="Arial, Helvetica, sans-serif" font-size="23" letter-spacing="1.2">ЕЛЕНА РЕНДАРЕВСКАЯ · МЫШЛЕНИЕ</text>
+</svg>

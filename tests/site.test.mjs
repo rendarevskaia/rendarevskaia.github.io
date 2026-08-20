@@ -207,6 +207,24 @@ test("статья о спиральной динамике опубликова
   await assert.doesNotReject(access(new URL("../dist/materials/spiralnaya-dinamika-pamyatka.pdf", import.meta.url)));
 });
 
+test("эссе о понимании обезличено и связано со спиральной динамикой", async () => {
+  const [article, spiral, archive, topic, sitemap] = await Promise.all([
+    read("articles/ponyat-slova-no-ne-smysl/index.html"),
+    read("articles/spiralnaya-dinamika-v-upravlenii/index.html"),
+    read("articles/index.html"),
+    read("topics/myshlenie/index.html"),
+    read("sitemap.xml"),
+  ]);
+  assert.match(article, /Понимание не складывается из отдельных слов/);
+  assert.match(article, /От информации к рабочей модели/);
+  assert.match(article, /href="\/articles\/spiralnaya-dinamika-v-upravlenii\/"/);
+  assert.doesNotMatch(article, /Светлана|Климова|админ/);
+  assert.match(spiral, /href="\/articles\/ponyat-slova-no-ne-smysl\/"/);
+  assert.match(archive, /articles\/ponyat-slova-no-ne-smysl\//);
+  assert.match(topic, /articles\/ponyat-slova-no-ne-smysl\//);
+  assert.match(sitemap, /articles\/ponyat-slova-no-ne-smysl\//);
+});
+
 test("внутренние ссылки ведут на собранные страницы и файлы", async () => {
   const dist = new URL("../dist/", import.meta.url);
   const files = (await readdir(dist, { recursive: true })).filter((file) => file.endsWith(".html"));
