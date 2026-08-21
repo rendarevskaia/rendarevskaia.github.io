@@ -7,7 +7,8 @@ const read = (file) => readFile(new URL(`../dist/${file}`, import.meta.url), "ut
 test("главная страница содержит имя, навигацию и SEO", async () => {
   const html = await read("index.html");
   assert.match(html, /Елена Рендаревская/);
-  assert.match(html, /Вхожу в бизнес через цифры и разбираю систему целиком/);
+  assert.match(html, /Пишу о деньгах, управлении и человеке внутри бизнеса/);
+  assert.match(html, /невозможность выйти из операционки обычно не считает никто/);
   assert.match(html, /практикующий психолог/);
   assert.match(html, /articles\/chto-to-proishodit-s-dengami\//);
   assert.match(html, /С чего начать/);
