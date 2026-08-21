@@ -83,6 +83,7 @@ function nav(active) {
     `<a href="${href(url)}"${active === key ? ' aria-current="page"' : ""}>${label}</a>`;
   return `<nav class="site-nav" aria-label="Основная навигация">
     ${item("articles", "Статьи", "/articles/")}
+    ${item("services", "Услуги", "/services/")}
     ${item("about", "Обо мне", "/about/")}
   </nav>`;
 }
@@ -129,7 +130,7 @@ function layout({
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   ${imageUrl ? `<meta name="twitter:image" content="${imageUrl}">` : ""}
-  <link rel="stylesheet" href="${href("/styles.css?v=20260815-management-cycle")}">
+  <link rel="stylesheet" href="${href("/styles.css?v=20260821-services")}">
   ${jsonLd ? `<script type="application/ld+json">${jsonLd}</script>` : ""}
 </head>
 <body>
@@ -145,6 +146,7 @@ function layout({
       <a href="${site.telegram}" rel="me">Telegram</a>
       <a href="${href("/rss.xml")}">RSS</a>
       <a href="${href("/articles/")}">Архив</a>
+      <a href="${href("/services/")}">Услуги</a>
     </nav>
   </footer>
 </body>
@@ -299,7 +301,18 @@ async function build() {
       if (!category || !populatedCategories.some((item) => item.name === category.name)) return "";
       return `<a href="${href(`/topics/${category.slug}/`)}"><span class="path-number">0${index + 1}</span><div><h3>${escapeHtml(pillar.title)}</h3><p>${escapeHtml(pillar.description)}</p></div><span class="article-arrow" aria-hidden="true">↗</span></a>`;
     }).join("")}</div>
-  </div></section>`;
+  </div></section>
+  <section class="shell section work-preview" aria-labelledby="work-title">
+    <div class="section-heading">
+      <div><p class="section-kicker">Работа со мной</p><h2 id="work-title">Три масштаба задачи</h2></div>
+      <a class="text-link" href="${href("/services/")}">Все форматы</a>
+    </div>
+    <div class="editorial-paths">
+      <a href="${href("/services/#decision")}"><span class="path-number">01</span><div><h3>Разобрать сложное решение</h3><p>Индивидуальная консультация для собственника, когда нужно увидеть варианты, риски и последствия.</p></div><span class="article-arrow" aria-hidden="true">↗</span></a>
+      <a href="${href("/services/#diagnostics")}"><span class="path-number">02</span><div><h3>Понять, что происходит с бизнесом</h3><p>Диагностика финансов, процессов и системы управления.</p></div><span class="article-arrow" aria-hidden="true">↗</span></a>
+      <a href="${href("/services/#session")}"><span class="path-number">03</span><div><h3>Принять решение вместе с командой</h3><p>Стратегическая работа с собственником, партнёрами или руководителями.</p></div><span class="article-arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </section>`;
 
   await writePage("/", layout({
     title: site.title,
@@ -422,6 +435,121 @@ async function build() {
   const aboutJsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "ProfilePage", "@id": absolute("/about/"), mainEntity: personSchema() });
   await writePage("/about/", layout({ title: about.data.seoTitle || `${about.data.title} — ${site.name}`, description: about.data.description, pathname: "/about/", active: "about", image: "/og/editorial.png", content: aboutContent, jsonLd: aboutJsonLd }));
 
+  const serviceArticles = [
+    bySlug.get("chto-to-proishodit-s-dengami"),
+    bySlug.get("finansovaya-sluzhba-obsluzhivaet-haos"),
+    bySlug.get("strategicheskaya-sessiya-rezultat-363-dnya"),
+  ];
+  if (serviceArticles.some((article) => !article)) throw new Error("Не найдены материалы для страницы услуг");
+
+  const servicesContent = `<section class="shell services-hero">
+    <div>
+      <p class="eyebrow">Работа со мной</p>
+      <h1 class="page-title">Финансы, управление и решения собственника</h1>
+    </div>
+    <div class="services-hero-copy">
+      <p>Чаще всего работа начинается с фразы: «У нас что-то происходит с деньгами». Мы проверяем финансовую модель, процессы, полномочия и решения собственника, чтобы найти причину и выбрать подходящий масштаб работы.</p>
+      <div class="hero-actions"><a class="button button-primary" href="${site.contact}">Описать задачу</a><a class="button button-secondary" href="#formats">Посмотреть форматы</a></div>
+    </div>
+  </section>
+
+  <section class="shell section" id="formats" aria-labelledby="formats-title">
+    <div class="section-heading"><div><p class="section-kicker">С чего начать</p><h2 id="formats-title">Три входа в работу</h2></div></div>
+    <div class="service-index">
+      <a href="#decision"><span class="path-number">01</span><h3>Одно сложное решение</h3><p>Работаем с собственником.</p></a>
+      <a href="#diagnostics"><span class="path-number">02</span><h3>Устройство бизнеса целиком</h3><p>Работаем с финансовой и управленческой системой.</p></a>
+      <a href="#session"><span class="path-number">03</span><h3>Совместное решение</h3><p>Работаем с собственником и командой.</p></a>
+    </div>
+  </section>
+
+  <section class="shell service-detail" id="decision" aria-labelledby="decision-title">
+    <header class="service-detail-header"><div><p class="section-kicker">01 · Собственник</p><h2 id="decision-title">Разбор сложного решения</h2></div><p class="service-price">50 000 ₽</p></header>
+    <div class="service-detail-grid">
+      <div class="service-lead"><p>Индивидуальная консультация для ситуации, в которой решение нельзя принять только по ощущению, но и одной таблицы для него недостаточно.</p><a class="text-link" href="${site.contact}">Обсудить консультацию →</a></div>
+      <div><h3>С какими вопросами</h3><ul><li>продолжать или закрывать направление;</li><li>брать ли кредит или инвестировать собственные деньги;</li><li>менять ли руководителя, партнёра или распределение ролей;</li><li>как выйти из операционки и не потерять управление;</li><li>какие риски создаёт выбранный сценарий.</li></ul></div>
+      <div><h3>Что делаем</h3><p>Отделяем факты и расчёты от предположений, определяем варианты и ограничения, смотрим на финансовые и управленческие последствия каждого решения.</p><h3>Результат</h3><p>Ясная формулировка задачи, карта вариантов и рисков, перечень данных и следующих действий, необходимых для решения.</p></div>
+    </div>
+  </section>
+
+  <section class="shell service-detail" id="diagnostics" aria-labelledby="diagnostics-title">
+    <header class="service-detail-header"><div><p class="section-kicker">02 · Система бизнеса</p><h2 id="diagnostics-title">Диагностика бизнеса через деньги</h2></div><p class="service-price">300 000 ₽</p></header>
+    <div class="service-detail-grid">
+      <div class="service-lead"><p>Проектное обследование для компании, в которой оборот, прибыль, ликвидность, отчётность или процессы перестали складываться в понятную картину.</p><a class="text-link" href="${site.contact}">Обсудить диагностику →</a></div>
+      <div><h3>Что исследуем</h3><ul><li>финансовую модель и экономику направлений;</li><li>прибыль, движение денег и оборотный капитал;</li><li>управленческую отчётность и качество данных;</li><li>процессы, которые создают финансовый результат;</li><li>полномочия, ответственность и роль собственника;</li><li>готовность учёта и процессов к автоматизации.</li></ul></div>
+      <div><h3>Результат</h3><p>Описание текущего устройства бизнеса, причины финансовых и управленческих симптомов, основные риски и приоритетный план изменений.</p><p>Если проблема требует внедрения управленческого учёта, автоматизации или перестройки регулярного менеджмента, объём следующего проекта определяется после диагностики.</p></div>
+    </div>
+  </section>
+
+  <section class="shell service-detail" id="session" aria-labelledby="session-title">
+    <header class="service-detail-header"><div><p class="section-kicker">03 · Собственник и команда</p><h2 id="session-title">Стратегическая сессия</h2></div><p class="service-price">от 490 000 ₽</p></header>
+    <div class="service-detail-grid">
+      <div class="service-lead"><p>Для ситуации, когда решение должны не только сформулировать, но и разделить собственники, партнёры или руководители компании.</p><a class="text-link" href="${site.contact}">Обсудить сессию →</a></div>
+      <div><h3>Когда подходит</h3><ul><li>нужно выбрать стратегические приоритеты;</li><li>партнёры по-разному видят следующий этап;</li><li>роли и зоны ответственности размыты;</li><li>команда обсуждает одни и те же проблемы без решения;</li><li>принятые решения не переходят в исполнение.</li></ul></div>
+      <div><h3>Что остаётся после</h3><p>Зафиксированные решения, приоритеты, владельцы, показатели, сроки и дорожная карта. Формат подготовки, состав участников и необходимое сопровождение определяются по задаче.</p></div>
+    </div>
+  </section>
+
+  <section class="section services-continuation" aria-labelledby="continuation-title"><div class="shell">
+    <div class="section-heading"><div><p class="section-kicker">После решения</p><h2 id="continuation-title">Сопровождение изменений</h2></div></div>
+    <p class="services-continuation-intro">Трекинг и внедрение появляются не до, а после того, как понятны причина, решение и объём изменений.</p>
+    <div class="continuation-list">
+      <div><p class="service-price">150 000 ₽</p><h3>Трекинг и помощь в развитии бизнеса</h3><p>Регулярная работа с выполнением решений, препятствиями и корректировкой следующего шага.</p></div>
+      <div><p class="service-price">Индивидуальный расчёт</p><h3>Проектное внедрение</h3><p>Управленческий учёт и автоматизация, финансовая политика или регулярный менеджмент — в объёме, который определён диагностикой.</p></div>
+    </div>
+  </div></section>
+
+  <section class="shell section services-method" aria-labelledby="method-title">
+    <div class="section-heading"><div><p class="section-kicker">Принципы работы</p><h2 id="method-title">Не объяснять цифрами всё. Не объяснять всё психологией</h2></div></div>
+    <div class="method-grid"><p>Я начинаю с проверяемой финансовой картины: что происходит с прибылью, деньгами, продуктом и обязательствами. Затем связываю цифру с процессом, ответственностью и решением, которое её создаёт.</p><p>Психология становится частью работы, когда бизнес-задача касается тревоги, отношений, идентичности или способности собственника сделать выбор. Она не подменяет финансовую диагностику и не включается в проект без отдельной договорённости.</p></div>
+  </section>
+
+  <section class="shell section" aria-labelledby="reading-title">
+    <div class="section-heading"><div><p class="section-kicker">До разговора</p><h2 id="reading-title">Материалы о моём подходе</h2></div><a class="text-link" href="${href("/articles/")}">Весь архив</a></div>
+    <div class="article-list">${serviceArticles.map(articleRow).join("\n")}</div>
+  </section>
+
+  <section class="shell section services-proof" aria-labelledby="proof-title">
+    <div class="section-heading"><div><p class="section-kicker">Опыт</p><h2 id="proof-title">Основания доверять</h2></div></div>
+    <dl><div><dt>С 2005 года</dt><dd>работаю с финансами</dd></div><div><dt>Собственный бизнес</dt><dd>создала системную компанию и вышла из неё</dd></div><div><dt>Более 1 млрд ₽</dt><dd>выручка компаний, с которыми я работала</dd></div><div><dt>Финансы + управление + психология</dt><dd>три плоскости одной предпринимательской задачи</dd></div></dl>
+  </section>
+
+  <section class="shell section services-faq" aria-labelledby="faq-title">
+    <div class="section-heading"><div><p class="section-kicker">FAQ</p><h2 id="faq-title">Перед началом работы</h2></div></div>
+    <div class="faq-list">
+      <details><summary>Как понять, какой формат мне подходит?</summary><p>Опишите ситуацию своими словами. Если вопрос касается одного решения, начнём с консультации. Если причина неясна и затрагивает устройство компании, нужна диагностика. Если решение должны принять несколько людей, обсуждаем сессию.</p></details>
+      <details><summary>Можно ли начать с одной консультации?</summary><p>Да. Консультация может завершиться самостоятельным планом действий или показать, что задаче нужен проектный формат.</p></details>
+      <details><summary>Вы работаете только с финансами?</summary><p>Нет. Финансы дают проверяемую картину результата, но причины часто находятся в бизнес-модели, процессах, ответственности и решениях собственника.</p></details>
+      <details><summary>Что входит в стоимость проекта?</summary><p>До начала работы мы фиксируем задачу, границы, этапы и ожидаемый результат. Состав диагностики, сессии или внедрения зависит от масштаба компании и количества участников.</p></details>
+      <details><summary>Как разделяются бизнес-консалтинг и психологическая работа?</summary><p>Финансовая и управленческая задача не становится психологической автоматически. Если требуется отдельная работа с состоянием или личным выбором собственника, мы обсуждаем её как самостоятельный формат.</p></details>
+    </div>
+  </section>
+
+  <section class="services-final"><div class="shell"><p class="section-kicker">Начать разговор</p><h2>Не обязательно заранее выбирать услугу</h2><p>Опишите, что происходит с бизнесом и какое решение не удаётся принять. Я скажу, относится ли задача к моей практике и какой формат здесь имеет смысл.</p><a class="button button-primary" href="${site.contact}">Описать задачу в Telegram</a></div></section>`;
+
+  const servicesJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": absolute("/services/"),
+    name: "Услуги Елены Рендаревской",
+    description: "CFO-консалтинг, финансово-управленческая диагностика и стратегические сессии для собственников и команд.",
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: [
+        { "@type": "Service", name: "Разбор сложного решения", provider: personSchema() },
+        { "@type": "Service", name: "Диагностика бизнеса через деньги", provider: personSchema() },
+        { "@type": "Service", name: "Стратегическая сессия", provider: personSchema() },
+      ],
+    },
+  });
+  await writePage("/services/", layout({
+    title: `Услуги для собственников и команд — ${site.name}`,
+    description: "CFO-консалтинг, финансово-управленческая диагностика, стратегические сессии и сопровождение изменений.",
+    pathname: "/services/",
+    active: "services",
+    content: servicesContent,
+    jsonLd: servicesJsonLd,
+  }));
+
   const resourceSource = await readFile(path.join(root, "content/pages/standart-upravlencheskih-vstrech.md"), "utf8");
   const resource = parseFrontMatter(resourceSource, "content/pages/standart-upravlencheskih-vstrech.md");
   const resourcePath = `/materials/${resource.data.slug}/`;
@@ -476,7 +604,7 @@ async function build() {
   await mkdir(path.join(out, "templates"), { recursive: true });
   await writeFile(path.join(out, "templates", resource.data.downloadName), `# ${resource.data.title}\n\n${resource.body}\n`);
 
-  const urls = ["/", "/articles/", "/about/", resourcePath, ...articles.map(articlePath), ...populatedCategories.map((category) => `/topics/${category.slug}/`)];
+  const urls = ["/", "/articles/", "/services/", "/about/", resourcePath, ...articles.map(articlePath), ...populatedCategories.map((category) => `/topics/${category.slug}/`)];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${escapeXml(absolute(url))}</loc></url>`).join("\n")}\n</urlset>\n`;
   await writeFile(path.join(out, "sitemap.xml"), sitemap);
   await writeFile(path.join(out, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${absolute("/sitemap.xml")}\n`);

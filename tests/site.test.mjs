@@ -18,7 +18,9 @@ test("главная страница содержит имя, навигаци�
   assert.match(html, /Три направления/);
   assert.match(html, /images\/brand\/elena-editorial-hero\.webp/);
   assert.match(html, /class="section section-band"/);
-  assert.match(html, /styles\.css\?v=20260815-management-cycle/);
+  assert.match(html, /styles\.css\?v=20260821-services/);
+  assert.match(html, /href="\/services\/"/);
+  assert.match(html, /Три масштаба задачи/);
   assert.doesNotMatch(html, /topics\/biznes\//);
   assert.match(html, /rel="canonical"/);
   assert.match(html, /rel="icon"/);
@@ -47,6 +49,29 @@ test("страница автора содержит биографию, фот�
   assert.match(html, /"sameAs":\["https:\/\/network\.tochka\.com\/expert\/64\/"/);
   assert.match(html, /href="https:\/\/t\.me\/rendarevskaya"/);
   assert.match(html, /href="https:\/\/pro\.rbc\.ru\/demo\/65c44e4c9a794727f4f4f595"/);
+});
+
+test("страница услуг показывает три входа, цены и продолжение работы", async () => {
+  const [html, home, sitemap] = await Promise.all([
+    read("services/index.html"),
+    read("index.html"),
+    read("sitemap.xml"),
+  ]);
+  assert.match(html, /Финансы, управление и решения собственника/);
+  assert.match(html, /Разбор сложного решения/);
+  assert.match(html, /Диагностика бизнеса через деньги/);
+  assert.match(html, /Стратегическая сессия/);
+  assert.match(html, /50 000 ₽/);
+  assert.match(html, /300 000 ₽/);
+  assert.match(html, /от 490 000 ₽/);
+  assert.match(html, /Трекинг и помощь в развитии бизнеса/);
+  assert.match(html, /150 000 ₽/);
+  assert.match(html, /Индивидуальный расчёт/);
+  assert.match(html, /Не объяснять цифрами всё\. Не объяснять всё психологией/);
+  assert.match(html, /Описать задачу в Telegram/);
+  assert.match(html, /"@type":"Service"/);
+  assert.match(home, /services\/#decision/);
+  assert.match(sitemap, /<loc>https:\/\/rendarevskaia\.github\.io\/services\/<\/loc>/);
 });
 
 test("первая статья собрана со всеми метаданными", async () => {
