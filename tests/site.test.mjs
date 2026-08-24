@@ -7,6 +7,9 @@ const read = (file) => readFile(new URL(`../dist/${file}`, import.meta.url), "ut
 test("главная страница содержит имя, навигацию и SEO", async () => {
   const html = await read("index.html");
   assert.match(html, /Елена Рендаревская/);
+  assert.match(html, /<title>Елена Рендаревская — авторский сайт о бизнесе и человеке<\/title>/);
+  assert.match(html, /Авторский сайт Елены Рендаревской\. Статьи о деньгах, управлении и психологии собственника/);
+  assert.match(html, /Авторский сайт · независимое медиа/);
   assert.match(html, /Пишу о деньгах, управлении и человеке внутри бизнеса/);
   assert.match(html, /невозможность выйти из операционки обычно не считает никто/);
   assert.match(html, /практикующий психолог/);
@@ -23,10 +26,13 @@ test("главная страница содержит имя, навигаци�
   assert.match(html, /Три масштаба задачи/);
   assert.doesNotMatch(html, /topics\/biznes\//);
   assert.match(html, /rel="canonical"/);
-  assert.match(html, /rel="icon"/);
+  assert.match(html, /rel="icon" href="\/favicon\.svg" type="image\/svg\+xml" sizes="any"/);
+  assert.match(html, /name="author" content="Елена Рендаревская"/);
+  assert.match(html, /rel="author" href="\/about\/"/);
   assert.match(html, /property="og:image"/);
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /"@type":"WebSite"/);
+  assert.match(html, /"alternateName":\["Elena Rendarevskaya","rendarevskaia\.github\.io"\]/);
   assert.match(html, /"@type":"CollectionPage"/);
   assert.match(html, /"alternateName":"Elena Rendarevskaya"/);
 });

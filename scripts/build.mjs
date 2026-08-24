@@ -110,12 +110,14 @@ function layout({
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
+  <meta name="author" content="${site.name}">
   ${robots ? `<meta name="robots" content="${robots}">` : ""}
   <meta name="theme-color" content="#fbfaf7">
   <link rel="canonical" href="${canonical}">
   <link rel="alternate" type="application/rss+xml" title="Материалы Елены Рендаревской" href="${absolute("/rss.xml")}">
-  <link rel="icon" href="${href(site.profile.image)}" type="image/jpeg">
+  <link rel="icon" href="${href("/favicon.svg")}" type="image/svg+xml" sizes="any">
   <link rel="apple-touch-icon" href="${href(site.profile.image)}">
+  <link rel="author" href="${href("/about/")}">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:type" content="${type}">
   <meta property="og:site_name" content="${site.name}">
@@ -265,7 +267,7 @@ async function build() {
 
   const home = `<section class="shell hero">
     <div class="hero-copy">
-      <p class="eyebrow">Независимое медиа и архив текстов</p>
+      <p class="eyebrow">Авторский сайт · независимое медиа</p>
       <h1>Елена<br>Рендаревская</h1>
       <p class="hero-note">Пишу о деньгах, управлении и человеке внутри бизнеса — о том, как решения собственника превращаются в прибыль или убыток, порядок или хаос, развитие компании или его собственное истощение. Потерянную прибыль видно в отчёте, а потерянное внимание, отложенную жизнь и невозможность выйти из операционки обычно не считает никто.</p>
       <p class="hero-support">Длинные тексты о финансах, стратегии, управлении и человеке в работе.</p>
@@ -326,7 +328,8 @@ async function build() {
           "@type": "WebSite",
           "@id": `${siteUrl}/#website`,
           name: site.name,
-          url: siteUrl,
+          alternateName: [site.alternateName, "rendarevskaia.github.io"],
+          url: absolute("/"),
           description: site.description,
           inLanguage: site.language,
           publisher: { "@id": `${absolute("/about/")}#person` },
@@ -335,7 +338,7 @@ async function build() {
           "@type": "CollectionPage",
           "@id": `${siteUrl}/#collection`,
           name: "Главные материалы Елены Рендаревской",
-          url: siteUrl,
+          url: absolute("/"),
           isPartOf: { "@id": `${siteUrl}/#website` },
           hasPart: featured.map((article) => ({ "@type": "Article", headline: article.title, url: articleUrl(article) })),
         },
