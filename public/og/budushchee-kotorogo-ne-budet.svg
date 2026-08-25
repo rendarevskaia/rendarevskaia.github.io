@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Когда цифры доказывают будущее, которого не будет</title>
+  <desc id="desc">Редакционная обложка о прогнозах, серебре и меняющейся системе</desc>
+  <rect width="1200" height="630" fill="#f7f0e3"/>
+  <rect x="0" y="0" width="1200" height="88" fill="#007b7c"/>
+  <circle cx="1035" cy="330" r="214" fill="#d8d2c4"/>
+  <circle cx="1035" cy="330" r="158" fill="none" stroke="#111714" stroke-width="3"/>
+  <circle cx="1035" cy="330" r="112" fill="#f7f0e3"/>
+  <text x="1035" y="355" text-anchor="middle" fill="#111714" font-family="Georgia, 'Times New Roman', serif" font-size="72">Ag</text>
+  <path d="M74 469 C189 421 286 378 380 306 C455 249 531 178 626 142" fill="none" stroke="#c58a35" stroke-width="8"/>
+  <path d="M626 142 C684 123 716 162 725 219 C739 309 685 397 610 451 C574 477 541 496 507 515" fill="none" stroke="#e45b3f" stroke-width="8"/>
+  <circle cx="626" cy="142" r="15" fill="#111714"/>
+  <path d="M82 492 H516" stroke="#111714" stroke-width="2"/>
+  <path d="M82 492 V238" stroke="#111714" stroke-width="2"/>
+  <g fill="#111714" font-family="Arial, Helvetica, sans-serif">
+    <text x="72" y="174" font-size="64" font-weight="700" letter-spacing="-1.5">Будущее, которого</text>
+    <text x="72" y="246" font-size="64" font-weight="700" letter-spacing="-1.5">не будет</text>
+    <text x="76" y="302" font-size="27" fill="#46514c">Серебро и пределы линейного прогноза</text>
+  </g>
+  <rect x="0" y="550" width="1200" height="80" fill="#111714"/>
+  <text x="75" y="600" fill="#f7f0e3" font-family="Arial, Helvetica, sans-serif" font-size="23" letter-spacing="1.2">ЕЛЕНА РЕНДАРЕВСКАЯ · СТРАТЕГИЯ</text>
+</svg>

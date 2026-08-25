@@ -306,6 +306,29 @@ test("позиционирование усилено экспертной ст�
   assert.match(sitemap, /articles\/ne-chtoby-dokazat\//);
 });
 
+test("статья о серебре связывает исторический прогноз с современной стратегией", async () => {
+  const [article, home, archive, topic, sitemap] = await Promise.all([
+    read("articles/budushchee-kotorogo-ne-budet/index.html"),
+    read("index.html"),
+    read("articles/index.html"),
+    read("topics/strategiya/index.html"),
+    read("sitemap.xml"),
+  ]);
+  assert.match(article, /Когда цифры доказывают будущее, которого не будет/);
+  assert.match(article, /Полвека спустя — тот же металл и та же ошибка/);
+  assert.match(article, /657,4 млн унций/);
+  assert.match(article, /Увидеть событие недостаточно/);
+  assert.match(article, /От причинных связей к предвидению/);
+  assert.match(article, /serebro-i-fotografiya\.jpg/);
+  assert.match(article, /serebro-solnechnaya-energetika-ai\.jpg/);
+  assert.match(article, /World Silver Survey 2026/);
+  assert.match(article, /property="og:image" content="https:\/\/rendarevskaia\.github\.io\/og\/budushchee-kotorogo-ne-budet\.png"/);
+  assert.match(home, /articles\/budushchee-kotorogo-ne-budet\//);
+  assert.match(archive, /articles\/budushchee-kotorogo-ne-budet\//);
+  assert.match(topic, /articles\/budushchee-kotorogo-ne-budet\//);
+  assert.match(sitemap, /articles\/budushchee-kotorogo-ne-budet\//);
+});
+
 test("внутренние ссылки ведут на собранные страницы и файлы", async () => {
   const dist = new URL("../dist/", import.meta.url);
   const files = (await readdir(dist, { recursive: true })).filter((file) => file.endsWith(".html"));
