@@ -21,7 +21,8 @@ test("главная страница содержит имя, навигаци�
   assert.match(html, /Три направления/);
   assert.match(html, /images\/brand\/elena-editorial-hero\.webp/);
   assert.match(html, /class="section section-band"/);
-  assert.match(html, /styles\.css\?v=20260821-services/);
+  assert.match(html, /styles\.css\?v=20260825-diagnostic/);
+  assert.match(html, /href="\/diagnostics\/september-2026\/"/);
   assert.match(html, /href="\/services\/"/);
   assert.match(html, /Три масштаба задачи/);
   assert.doesNotMatch(html, /topics\/biznes\//);
@@ -327,6 +328,58 @@ test("статья о серебре связывает исторический
   assert.match(archive, /articles\/budushchee-kotorogo-ne-budet\//);
   assert.match(topic, /articles\/budushchee-kotorogo-ne-budet\//);
   assert.match(sitemap, /articles\/budushchee-kotorogo-ne-budet\//);
+});
+
+test("диагностика сентября считает ограничения в браузере и доступна с главной", async () => {
+  const [diagnostic, script, home, services, sitemap] = await Promise.all([
+    read("diagnostics/september-2026/index.html"),
+    read("diagnostics/september-2026.js"),
+    read("index.html"),
+    read("services/index.html"),
+    read("sitemap.xml"),
+  ]);
+  assert.match(diagnostic, /Что сейчас ограничивает результат вашего бизнеса до конца года/);
+  assert.match(diagnostic, /Пятнадцать базовых вопросов в шести блоках/);
+  assert.match(diagnostic, /четыре уточняющих вопроса/);
+  assert.match(diagnostic, /name="q15"/);
+  assert.match(diagnostic, /name="q3_expected"/);
+  assert.match(diagnostic, /name="q3_actual"/);
+  assert.match(diagnostic, /name="q3_unknown"/);
+  assert.match(diagnostic, /нет сезонной плановой траектории/);
+  assert.match(diagnostic, /id="diagnostic-confirmation" hidden/);
+  assert.match(diagnostic, /Сначала проверить/);
+  assert.match(diagnostic, /Вы ответили, что/);
+  assert.match(diagnostic, /Разобрать мою ситуацию с Еленой/);
+  assert.doesNotMatch(diagnostic, /Уверенность вывода/);
+  assert.match(diagnostic, /id="diagnostic-result" hidden/);
+  assert.match(diagnostic, /Ответы обрабатываются только в вашем браузере/);
+  assert.match(diagnostic, /september-2026\.js/);
+  assert.match(diagnostic, /og\/tochka-sentyabrya-2026\.png/);
+  assert.match(script, /План продаж пока существует одной общей цифрой/);
+  assert.match(script, /Когда собственник отходит от текущей работы, важные вопросы начинают ждать его возвращения/);
+  assert.match(script, /confirm_sales_1/);
+  assert.match(script, /цены успевали за изменением затрат/);
+  assert.doesNotMatch(script, /маржинальная прибыль на единицу продажи/);
+  assert.match(script, /Не хватает данных/);
+  assert.match(script, /План уже расходится с фактом, но причина находится не там, где мы искали/);
+  assert.match(script, /Важные вопросы остаются без решения, пока к ним не подключается собственник/);
+  assert.match(script, /держатся ли ключевые переговоры и сделки на его личном участии/);
+  assert.match(script, /resultEvidence/);
+  assert.match(script, /Только один ответ/);
+  assert.match(script, /activeConfirmationContours\.map/);
+  assert.match(script, /Сначала восстановите цифры/);
+  assert.match(script, /revenueGap/);
+  assert.doesNotMatch(script, /result-confidence/);
+  assert.match(script, /PDFDocument\.create/);
+  assert.match(script, /vendor\/pdf-lib\.min\.js/);
+  assert.match(script, /tochka-sentyabrya-2026\.pdf/);
+  assert.match(script, /Скачать PDF/);
+  assert.match(script, /Открыть PDF/);
+  assert.match(script, /в Chrome или Safari/);
+  assert.match(home, /Точка сентября · 2026/);
+  assert.match(home, /Пройти диагностику/);
+  assert.match(services, /Начать с «Точки сентября»/);
+  assert.match(sitemap, /<loc>https:\/\/rendarevskaia\.github\.io\/diagnostics\/september-2026\/<\/loc>/);
 });
 
 test("внутренние ссылки ведут на собранные страницы и файлы", async () => {

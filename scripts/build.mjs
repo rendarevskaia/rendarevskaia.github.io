@@ -9,6 +9,7 @@ import {
   renderMarkdown,
   site,
 } from "../src/site.mjs";
+import { renderSeptemberDiagnostic } from "../src/september-diagnostic.mjs";
 import { escapeHtml, escapeXml } from "../src/utils.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -83,6 +84,7 @@ function nav(active) {
     `<a href="${href(url)}"${active === key ? ' aria-current="page"' : ""}>${label}</a>`;
   return `<nav class="site-nav" aria-label="Основная навигация">
     ${item("articles", "Статьи", "/articles/")}
+    ${item("diagnostic", "Диагностика", "/diagnostics/september-2026/")}
     ${item("services", "Услуги", "/services/")}
     ${item("about", "Обо мне", "/about/")}
   </nav>`;
@@ -132,7 +134,7 @@ function layout({
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
   ${imageUrl ? `<meta name="twitter:image" content="${imageUrl}">` : ""}
-  <link rel="stylesheet" href="${href("/styles.css?v=20260821-services")}">
+  <link rel="stylesheet" href="${href("/styles.css?v=20260825-diagnostic")}">
   ${jsonLd ? `<script type="application/ld+json">${jsonLd}</script>` : ""}
 </head>
 <body>
@@ -148,6 +150,7 @@ function layout({
       <a href="${site.telegram}" rel="me">Telegram</a>
       <a href="${href("/rss.xml")}">RSS</a>
       <a href="${href("/articles/")}">Архив</a>
+      <a href="${href("/diagnostics/september-2026/")}">Диагностика</a>
       <a href="${href("/services/")}">Услуги</a>
     </nav>
   </footer>
@@ -296,6 +299,10 @@ async function build() {
     </div>
     <div class="article-list">${latest.map(articleRow).join("\n") || "<p>Материалы скоро появятся.</p>"}</div>
   </section>
+  <section class="diagnostic-preview" aria-labelledby="diagnostic-preview-title"><div class="shell diagnostic-preview-grid">
+    <div><p class="section-kicker">Точка сентября · 2026</p><h2 id="diagnostic-preview-title">Что ограничивает результат бизнеса до конца года</h2></div>
+    <div><p>Пятнадцать вопросов по причинной цепочке: от спроса и экономики до управления и роли собственника. На выходе — главное ограничение и три действия на 30 дней.</p><a class="button button-primary" href="${href("/diagnostics/september-2026/")}">Пройти диагностику</a></div>
+  </div></section>
   <section class="section section-band" aria-labelledby="directions-title"><div class="shell">
     <div class="section-heading"><div><p class="section-kicker">Редакционная карта</p><h2 id="directions-title">Три направления</h2></div></div>
     <div class="editorial-paths">${site.home.pillars.map((pillar, index) => {
@@ -477,7 +484,7 @@ async function build() {
   <section class="shell service-detail" id="diagnostics" aria-labelledby="diagnostics-title">
     <header class="service-detail-header"><div><p class="section-kicker">02 · Система бизнеса</p><h2 id="diagnostics-title">Диагностика бизнеса через деньги</h2></div><p class="service-price">300 000 ₽</p></header>
     <div class="service-detail-grid">
-      <div class="service-lead"><p>Проектное обследование для компании, в которой оборот, прибыль, ликвидность, отчётность или процессы перестали складываться в понятную картину.</p><a class="text-link" href="${site.contact}">Обсудить диагностику →</a></div>
+      <div class="service-lead"><p>Проектное обследование для компании, в которой оборот, прибыль, ликвидность, отчётность или процессы перестали складываться в понятную картину.</p><div class="service-entry-links"><a class="text-link" href="${href("/diagnostics/september-2026/")}">Начать с «Точки сентября» →</a><a class="text-link" href="${site.contact}">Обсудить проектную диагностику →</a></div></div>
       <div><h3>Что исследуем</h3><ul><li>финансовую модель и экономику направлений;</li><li>прибыль, движение денег и оборотный капитал;</li><li>управленческую отчётность и качество данных;</li><li>процессы, которые создают финансовый результат;</li><li>полномочия, ответственность и роль собственника;</li><li>готовность учёта и процессов к автоматизации.</li></ul></div>
       <div><h3>Результат</h3><p>Описание текущего устройства бизнеса, причины финансовых и управленческих симптомов, основные риски и приоритетный план изменений.</p><p>Если проблема требует внедрения управленческого учёта, автоматизации или перестройки регулярного менеджмента, объём следующего проекта определяется после диагностики.</p></div>
     </div>
@@ -553,6 +560,28 @@ async function build() {
     jsonLd: servicesJsonLd,
   }));
 
+  const diagnosticPath = "/diagnostics/september-2026/";
+  const diagnosticContent = renderSeptemberDiagnostic({ href, contact: site.contact });
+  const diagnosticJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": absolute(diagnosticPath),
+    name: "Точка сентября — 2026",
+    description: "Онлайн-диагностика пяти направлений бизнеса: продажи, экономика, выполнение заказов, управление и зависимость текущей работы от собственника.",
+    inLanguage: site.language,
+    author: personSchema(),
+    about: ["стратегия бизнеса", "управление", "финансы бизнеса", "роль собственника"],
+  });
+  await writePage(diagnosticPath, layout({
+    title: `Точка сентября — 2026: диагностика бизнеса — ${site.name}`,
+    description: "15 базовых и 4 уточняющих вопроса, чтобы выбрать первое направление проверки и конкретные данные для следующего шага.",
+    pathname: diagnosticPath,
+    active: "diagnostic",
+    image: "/og/tochka-sentyabrya-2026.png",
+    content: diagnosticContent,
+    jsonLd: diagnosticJsonLd,
+  }));
+
   const resourceSource = await readFile(path.join(root, "content/pages/standart-upravlencheskih-vstrech.md"), "utf8");
   const resource = parseFrontMatter(resourceSource, "content/pages/standart-upravlencheskih-vstrech.md");
   const resourcePath = `/materials/${resource.data.slug}/`;
@@ -607,7 +636,7 @@ async function build() {
   await mkdir(path.join(out, "templates"), { recursive: true });
   await writeFile(path.join(out, "templates", resource.data.downloadName), `# ${resource.data.title}\n\n${resource.body}\n`);
 
-  const urls = ["/", "/articles/", "/services/", "/about/", resourcePath, ...articles.map(articlePath), ...populatedCategories.map((category) => `/topics/${category.slug}/`)];
+  const urls = ["/", "/articles/", "/services/", diagnosticPath, "/about/", resourcePath, ...articles.map(articlePath), ...populatedCategories.map((category) => `/topics/${category.slug}/`)];
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${escapeXml(absolute(url))}</loc></url>`).join("\n")}\n</urlset>\n`;
   await writeFile(path.join(out, "sitemap.xml"), sitemap);
   await writeFile(path.join(out, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${absolute("/sitemap.xml")}\n`);
